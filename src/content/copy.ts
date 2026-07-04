@@ -4,6 +4,11 @@
 
 export const DOB_ISO = "2003-07-13T00:00:00+02:00";
 
+// The one place the production domain lives. Used for canonical URLs,
+// the sitemap, robots and the absolute OG image URL. Change it here if
+// the site ever moves.
+export const SITE_URL = "https://siebebaree.com";
+
 export const LINKS = {
   email: "siebe@enkryptify.com",
   github: "https://github.com/SiebeBaree",
