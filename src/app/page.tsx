@@ -1,5 +1,7 @@
-import { Site } from "@/components/Site";
-
-export default function Home() {
-  return <Site />;
+export default function Page() {
+  return (
+    <main className="flex min-h-dvh items-center justify-center">
+      <h1 className="text-2xl font-medium tracking-tight">Coming soon</h1>
+    </main>
+  );
 }
