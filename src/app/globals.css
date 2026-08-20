@@ -1,12 +1,160 @@
 @import "tailwindcss";
 
+/* Component-owned animations. Each file belongs to the component named in it. */
+@import "../components/overlay/scroll-cue.css";
+@import "../components/overlay/dock.css";
+
+/*
+ * SHARED. Everything below is depended on by every section, so a change here
+ * shows up across the whole site.
+ *
+ * Design language ported from the Umber desktop app: a cool light-blue canvas
+ * that is never pure white, Liquid Glass surfaces with a bright top edge and
+ * blue-black shadows, film grain over everything, and huge blurred white
+ * blobs drifting behind the content.
+ */
+
+:root {
+  color-scheme: light;
+
+  --sky-canvas: #b9d4f0;
+  --sky-surface: #ffffff;
+  --sky-line: #dde4f0;
+  --sky-ink: #1c2333;
+  --sky-muted: #5f6b83;
+  --sky-accent: #3164e4;
+  --sky-accent-strong: #2450c4;
+  --sky-accent-ink: #f6f9ff;
+
+  --sky-glass: rgb(255 255 255 / 0.52);
+  --sky-glass-strong: rgb(255 255 255 / 0.72);
+  --sky-glass-hover: rgb(255 255 255 / 0.92);
+  --sky-glass-edge: rgb(255 255 255 / 0.65);
+  --sky-glass-edge-strong: rgb(255 255 255 / 0.95);
+  --sky-glass-shadow: rgb(28 41 90 / 0.1);
+
+  --sky-hover-tint: rgb(28 35 51 / 0.06);
+  --sky-control-transition:
+    background-color 200ms ease-out, border-color 200ms ease-out, color 200ms ease-out,
+    box-shadow 200ms ease-out, transform 150ms ease-out;
+}
+
 @theme inline {
-  --color-bg: #0a0a0a;
-  --color-ink: #ededed;
+  --color-canvas: var(--sky-canvas);
+  --color-surface: var(--sky-surface);
+  --color-line: var(--sky-line);
+  --color-ink: var(--sky-ink);
+  --color-muted: var(--sky-muted);
+  --color-accent: var(--sky-accent);
+  --color-accent-strong: var(--sky-accent-strong);
+  --color-accent-ink: var(--sky-accent-ink);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-script: var(--font-script);
+}
+
+/*
+ * The canvas colour lives on html ONLY. If body also carried an opaque
+ * background it would stop propagating to the canvas and paint as a normal
+ * block, above every negative-z-index layer, hiding the sky backdrop
+ * (gradient, blobs and grain) entirely.
+ */
+html {
+  background: var(--sky-canvas);
 }
 
 html,
 body {
-  background: var(--color-bg);
-  color: var(--color-ink);
+  color: var(--sky-ink);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+ * The native scrollbar is hidden entirely (overlay/ScrollbarOverlay.tsx draws
+ * a floating thumb instead), so locking and unlocking scroll during the cloud
+ * intro can never shift the layout.
+ */
+html {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+::selection {
+  background: rgb(49 100 228 / 0.22);
+  color: #10203a;
+}
+
+/* ---------- Liquid Glass ---------- */
+
+@utility glass {
+  border: 1px solid var(--sky-glass-edge);
+  background-color: var(--sky-glass);
+  backdrop-filter: blur(24px) saturate(170%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.85),
+    0 12px 32px -16px var(--sky-glass-shadow),
+    0 2px 8px -4px var(--sky-glass-shadow);
+}
+
+@utility glass-raised {
+  border: 1px solid var(--sky-glass-edge);
+  background-color: var(--sky-glass-strong);
+  backdrop-filter: blur(24px) saturate(170%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.9),
+    0 16px 40px -20px var(--sky-glass-shadow),
+    0 2px 10px -6px var(--sky-glass-shadow);
+}
+
+@utility glass-control {
+  border: 1px solid var(--sky-glass-edge);
+  background-color: var(--sky-glass-strong);
+  backdrop-filter: blur(24px) saturate(170%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.9),
+    0 16px 40px -20px var(--sky-glass-shadow),
+    0 2px 10px -6px var(--sky-glass-shadow);
+  transition: var(--sky-control-transition);
+
+  &:hover {
+    border-color: var(--sky-glass-edge-strong);
+    background-color: var(--sky-glass-hover);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 1),
+      0 18px 44px -20px var(--sky-glass-shadow),
+      0 4px 14px -6px var(--sky-glass-shadow);
+  }
+}
+
+@utility tint-control {
+  transition: var(--sky-control-transition);
+
+  &:hover {
+    background-color: var(--sky-hover-tint);
+  }
+}
+
+/* ---------- Focus ---------- */
+
+@utility focus-ring {
+  outline: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--sky-accent);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -1,0 +1,31 @@
+# Siebe Barée
+
+> Founder and software engineer from Ghent, Belgium. Founder of Enkryptify. Builds free open source tools that feel as good as they work. This site is his personal portfolio at https://siebebaree.com.
+
+Siebe Barée has been building software since owning a Minecraft server community at twelve. He went from Discord bots as a teenager to founding Enkryptify, a secrets management platform, and now ships small free tools alongside it.
+
+## Current apps
+
+- [Umber](https://umber.s4.nu): a free open source AI image and video studio for macOS, Windows and Linux. Bring your own API keys, pay the labs at cost and keep every creation on your device. MIT licensed.
+- [anyfmt](https://anyfmt.xyz): an image converter that runs entirely in the browser tab. Nothing is uploaded, so HEIC files, heavy screenshots and photos with GPS metadata never leave the laptop.
+- [OneTimePic](https://onetimepic.xyz): sends a photo that opens exactly once. The image is encrypted in the browser and the file is gone after that single view.
+
+## Selected work
+
+- [Enkryptify](https://siebebaree.com/work/enkryptify): the company he founded in 2024, a secrets management platform.
+- [EEVEE Mobility](https://siebebaree.com/work/eevee-mobility): software engineering work on an EV charging platform, started in 2024.
+- [Coinz](https://siebebaree.com/work/coinz): a Discord economy bot that grew to 1.35 million users across three years, six rebuilds and around 100,000 lines of TypeScript.
+- [SiebeGPT](https://siebebaree.com/work/siebegpt): a ChatGPT-style AI workspace with chat, image, video, music and code generation, built when ChatGPT was brand new.
+- [HabitFlow](https://siebebaree.com/work/habitflow): a habit tracker web app born from Atomic Habits, built in about a week and sold as a one-time purchase.
+- [Karting](https://siebebaree.com/work/karting): a web app that pulls Apex Timing data to show where he ranks on every karting track he has raced.
+- [BotHosted](https://siebebaree.com/work/bothosted): his teenage bot company, Discord bots built and hosted for a fee with a team of five.
+
+The full list of nineteen projects, from a 2013 Minecraft community to today, lives at https://siebebaree.com with a written chapter for each at https://siebebaree.com/work/[slug].
+
+## Links
+
+- [GitHub](https://github.com/SiebeBaree)
+- [LinkedIn](https://www.linkedin.com/in/siebe-baree)
+- [X](https://x.com/BareeSiebe)
+- [Enkryptify](https://enkryptify.com)
+- Email: bareesiebe@gmail.com

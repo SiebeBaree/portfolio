@@ -1,0 +1,26 @@
+/*
+ * Owned by overlay/ScrollCue.tsx.
+ *
+ * The arrow drifts down through its ring, fading at both ends, with a beat of
+ * rest between passes so it never reads as a spinner.
+ */
+
+@keyframes scroll-arrow {
+  0% {
+    transform: translateY(-9px);
+    opacity: 0;
+  }
+  35% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  70%,
+  100% {
+    transform: translateY(9px);
+    opacity: 0;
+  }
+}
+
+@utility scroll-arrow {
+  animation: scroll-arrow 2s cubic-bezier(0.45, 0, 0.4, 1) infinite;
+}
