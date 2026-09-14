@@ -669,7 +669,7 @@ export default function About() {
     <section
       ref={sectionRef}
       id="about"
-      className="mx-auto flex min-h-[70svh] w-full max-w-3xl flex-col items-center justify-center px-6 py-24 text-center sm:px-10"
+      className="mx-auto flex w-full max-w-3xl flex-col items-center justify-center px-6 py-24 text-center sm:px-10"
     >
       <div className="relative">
         {/* the flock, scattered through the whitespace around the copy */}
@@ -719,8 +719,16 @@ export default function About() {
                 Limburg
                 <BelgianFlag />
               </Peek>
-              , Belgium. I&apos;ve built games, developer tools and a VC-backed
-              company. Now I&apos;m figuring out what I want to build next.
+              , Belgium. Right now I&apos;m building{" "}
+              <a
+                href="https://notchlet.com"
+                target="_blank"
+                rel="noreferrer"
+                className="focus-ring underline decoration-ink/30 underline-offset-4"
+              >
+                Notchlet
+              </a>
+              , a Mac app for keeping track of AI coding usage.
             </p>
             <p>
               Away from my laptop, I spend a lot of time at the{" "}

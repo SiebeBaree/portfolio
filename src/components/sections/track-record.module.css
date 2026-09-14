@@ -1,0 +1,136 @@
+.section {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 32px 40px 96px;
+  scroll-margin-top: 40px;
+}
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin-bottom: 40px;
+}
+.projects {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 64px;
+}
+.project {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 5;
+  border-top: 1px solid #1c233326;
+  padding-top: 24px;
+}
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.heading h3 {
+  font-family: var(--font-display);
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+.heading p {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #344156;
+}
+.heading img {
+  width: 40px;
+  height: 40px;
+}
+.metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 36px;
+  margin: 32px 0 24px;
+}
+.metrics div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 8px;
+}
+.metrics dd {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 5vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #285bb8;
+}
+.metrics dt {
+  font-size: 12px;
+  color: #344156;
+}
+.description {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #344156;
+}
+.link {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 24px;
+  margin: 20px 0 32px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #1c23334d;
+  font-size: 14px;
+}
+.link span {
+  font-size: 20px;
+  transition: transform 180ms ease;
+}
+.link:hover span {
+  transform: translate(3px, -3px);
+}
+.imageLink {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  align-self: center;
+  justify-self: center;
+}
+.screenshot {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 16px 28px -20px #18234366;
+}
+.enkryptifyImage {
+  filter: drop-shadow(0 14px 16px #18234340);
+}
+.enkryptifyImage .screenshot {
+  /* Trim the asset's 92px shadow border, which ends in a hard horizontal edge. */
+  clip-path: inset(5.186% 3.892% round 8px);
+  box-shadow: none;
+}
+.link:focus-visible,
+.imageLink:focus-visible {
+  outline: 2px solid var(--sky-accent);
+  outline-offset: 8px;
+}
+@media (max-width: 700px) {
+  .section {
+    padding: 24px 24px 64px;
+  }
+  .projects {
+    grid-template-columns: 1fr;
+    row-gap: 56px;
+  }
+  .project {
+    grid-template-rows: auto;
+    grid-row: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .link:hover span {
+    transform: none;
+    transition: none;
+  }
+}

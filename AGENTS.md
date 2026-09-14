@@ -20,14 +20,14 @@ without colliding. Listed roughly in the order they paint.
 | Scroll cue in the bottom-left corner of the first screen | `src/components/overlay/ScrollCue.tsx`, `scroll-cue.css` |
 | Liquid Glass dock of contact links, pinned bottom centre | `src/components/overlay/Dock.tsx`, `dock.css` |
 | Overlay scrollbar | `src/components/overlay/ScrollbarOverlay.tsx` |
-| Hero: the name and the portrait choreography | `src/components/sections/Hero.tsx` |
+| Hero: co-founder search, name and portrait choreography | `src/components/sections/Hero.tsx` |
+| Co-founder fit: business ownership and commitment | `src/components/sections/CoFounder.tsx` |
 | ASCII signature logo | `src/components/hero/AsciiSignature.tsx` |
 | Portrait cutout | `src/components/hero/Portrait.tsx` |
 | About me: hover-word scenes, birds, handwritten sign-off | `src/components/sections/About.tsx` |
 | Other apps and optional earlier stories: compact links | `src/components/sections/CurrentApps.tsx` |
-| Enkryptify: company story, funding and product image | `src/components/sections/Enkryptify.tsx`, `enkryptify.module.css` |
-| Coinz: usage, game artwork and story | `src/components/sections/Coinz.tsx`, `coinz.module.css` |
-| Invitation to meet | `src/components/sections/Contact.tsx` |
+| Track record: Enkryptify and Coinz as supporting evidence | `src/components/sections/TrackRecord.tsx`, `track-record.module.css` |
+| Invitation to meet potential co-founders in San Francisco | `src/components/sections/Contact.tsx` |
 | Cloud page transition and its navigate hook | `src/components/transition/CloudTransition.tsx` |
 | Project pages: /work/[slug], one complete story per project | `src/app/work/[slug]/page.tsx`, `src/components/sections/ProjectChapter.tsx` |
 | Chapter stories, one entry per project (images in `src/assets/work/` and `public/apps/`) | `src/lib/chapters.ts` |

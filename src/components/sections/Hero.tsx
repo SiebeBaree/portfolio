@@ -10,13 +10,14 @@ import {
 import { type CSSProperties, useEffect } from "react";
 import AsciiSignature from "@/components/hero/AsciiSignature";
 import Portrait from "@/components/hero/Portrait";
+import { COINZ_STATS, ENKRYPTIFY_FUNDING } from "@/lib/projects";
 import { EASE_EXPO_OUT, EASE_OUT_QUINT, INTRO } from "@/lib/timeline";
 
 /*
  * The portrait dominates the hero: shoulders end exactly on the fold, and the
  * name sits at eye level. `FACE_H` is the single size the portrait, the name
  * gap and the name's vertical position are all derived from, so they can
- * never drift apart. (78vh tall unless the viewport is too narrow, then
+ * never drift apart. (68svh tall unless the viewport is too narrow, then
  * width-constrained.)
  *
  * The three ratios below are measured off the photo's alpha channel and are
@@ -63,10 +64,10 @@ export default function Hero() {
   );
 
   return (
-    <section className="relative min-h-dvh overflow-hidden [--portrait-height:min(68svh,118vw)] md:[--portrait-height:min(78svh,82vw)]">
+    <section className="relative min-h-[max(100svh,740px)] overflow-hidden [--portrait-height:min(62svh,118vw)] md:min-h-[max(100svh,700px)] md:[--portrait-height:min(68svh,82vw)]">
       {/* Identity stays visible while the portrait enters. */}
       <motion.header
-        className="absolute inset-x-0 top-0 z-10 flex flex-col items-center gap-2 pt-6"
+        className="absolute inset-x-0 top-0 z-10 flex flex-col items-center gap-2 px-6 pt-6 text-center"
         initial={reducedMotion ? false : { opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -76,14 +77,19 @@ export default function Hero() {
         }}
       >
         <AsciiSignature />
-        <p className="text-[11px] font-medium tracking-[0.08em] text-ink/75">
-          Founder &amp; software engineer
+        <p className="mt-3 max-w-2xl font-display text-[clamp(2rem,4vw,3.5rem)] leading-[1.05] tracking-tight">
+          I&apos;m looking for a co-founder.
+        </p>
+        <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/80 sm:text-base">
+          I built Coinz to {COINZ_STATS.users} users and raised{" "}
+          {ENKRYPTIFY_FUNDING} for Enkryptify. Now I&apos;m looking for a
+          partner to lead the business.
         </p>
         <a
           href="#contact"
           className="focus-ring mt-2 border-b border-ink/30 pb-1 text-xs text-ink/80 transition-colors hover:text-accent"
         >
-          San Francisco in January. Let&apos;s meet{" "}
+          San Francisco · Three weeks in January{" "}
           <span aria-hidden="true">↗</span>
         </a>
       </motion.header>

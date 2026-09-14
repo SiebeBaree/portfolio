@@ -8,7 +8,7 @@ import Reveal from "@/components/ui/Reveal";
 import StoryLink from "@/components/ui/StoryLink";
 import type { Chapter, ChapterBlock } from "@/lib/chapters";
 import type { Project } from "@/lib/projects";
-import { SF_MEETUP_EMAIL_URL } from "@/lib/site";
+import { COFOUNDER_EMAIL_URL } from "@/lib/site";
 import { EASE_OUT_QUINT } from "@/lib/timeline";
 
 /** Shared layout for the project stories and their onward links. */
@@ -134,12 +134,19 @@ export default function ProjectChapter({
       </div>
 
       <Reveal className="mt-16 border-t border-ink/15 pt-9">
-        <h2 className="font-display text-3xl">In San Francisco in January?</h2>
+        <h2 className="font-display text-3xl">
+          Looking for a technical co-founder?
+        </h2>
+        <p className="mt-4 text-base leading-relaxed text-ink/80">
+          I&apos;m looking for a partner to lead the business. I&apos;ll be in
+          San Francisco for three weeks in January to meet potential
+          co-founders.
+        </p>
         <a
-          href={SF_MEETUP_EMAIL_URL}
+          href={COFOUNDER_EMAIL_URL}
           className="focus-ring mt-4 inline-flex items-center gap-5 border-b border-ink/40 pb-2 text-sm"
         >
-          Meet me there <span aria-hidden="true">↗</span>
+          Let&apos;s talk <span aria-hidden="true">↗</span>
         </a>
       </Reveal>
       {/* Continue through the selected stories. */}

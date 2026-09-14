@@ -1,5 +1,5 @@
 import Reveal from "@/components/ui/Reveal";
-import { CONTACT_EMAIL, SF_MEETUP_EMAIL_URL } from "@/lib/site";
+import { COFOUNDER_EMAIL_URL, SF_MEETUP_EMAIL_URL } from "@/lib/site";
 
 export default function Contact() {
   return (
@@ -13,22 +13,32 @@ export default function Contact() {
           id="contact-title"
           className="font-display text-[clamp(3.6rem,8vw,7rem)] leading-[1.02] tracking-[-0.04em]"
         >
-          San Francisco,
+          Let&apos;s meet
           <br />
-          <span className="italic text-accent">let&apos;s meet.</span>
+          <span className="italic text-accent">in San Francisco.</span>
         </h2>
         <div className="mt-9 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between sm:gap-12">
-          <p className="max-w-md text-base leading-relaxed text-ink/80 sm:text-lg">
-            I&apos;m heading to San Francisco for three weeks in January.
-            I&apos;m figuring out what to build next and want to spend that time
-            with founders who are going after something big.
-          </p>
+          <div className="max-w-lg space-y-5 text-base leading-relaxed text-ink/80 sm:text-lg">
+            <p>
+              I&apos;ll be there for three weeks in January to find a
+              co-founder. If you&apos;re strong on the business side and looking
+              for someone to build with, I&apos;d like to meet you.
+            </p>
+            <p>
+              Tell me what you&apos;ve worked on and what you&apos;d want to
+              build. We can start with a call before the trip.
+            </p>
+            <p className="text-sm leading-relaxed">
+              I&apos;ll return to Belgium afterwards. Longer term, I want to
+              move to the US and build a company there.
+            </p>
+          </div>
           <div className="flex shrink-0 flex-col items-start gap-4">
             <a
               href={SF_MEETUP_EMAIL_URL}
               className="focus-ring group flex w-fit items-center gap-6 border-b border-ink/50 py-3 text-base"
             >
-              Meet me in San Francisco{" "}
+              Meet in January{" "}
               <span
                 aria-hidden="true"
                 className="text-2xl transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1"
@@ -37,10 +47,10 @@ export default function Contact() {
               </span>
             </a>
             <a
-              href={`mailto:${CONTACT_EMAIL}`}
+              href={COFOUNDER_EMAIL_URL}
               className="focus-ring py-2 text-sm text-ink/75 underline underline-offset-4"
             >
-              Or arrange a call
+              Let&apos;s have a call first
             </a>
           </div>
         </div>
