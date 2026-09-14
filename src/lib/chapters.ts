@@ -23,11 +23,12 @@ export type Chapter = {
 export const CHAPTERS = {
   enkryptify: {
     tagline: "The secrets management company I founded.",
-    description: `Enkryptify, the secrets management company I founded. We raised ${ENKRYPTIFY_FUNDING} in VC funding and had paying customers. The company did not work out, and I have since moved on.`,
+    description: `Enkryptify was the secrets management company I founded. We raised ${ENKRYPTIFY_FUNDING} in VC funding and had paying customers. Founded in 2024, now closed.`,
     facts: [
       `${ENKRYPTIFY_FUNDING} VC funding`,
       "Paying customers",
       "Secrets management",
+      "Closed",
     ],
 
     story: [
@@ -37,7 +38,7 @@ export const CHAPTERS = {
       },
       {
         kind: "text",
-        body: `We raised ${ENKRYPTIFY_FUNDING} from VCs and had paying customers. The company did not work out, and I have since moved on. I am now figuring out what to build next.`,
+        body: `We raised ${ENKRYPTIFY_FUNDING} from VCs and had paying customers.`,
       },
       {
         kind: "image",

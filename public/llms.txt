@@ -4,7 +4,7 @@
 
 ## Featured work
 
-- [Enkryptify](https://siebebaree.com/work/enkryptify): a secrets management company Siebe founded. The team raised €225K in VC funding and had paying customers. The company did not work out and Siebe has moved on. The product helped software teams manage API keys and credentials across environments.
+- [Enkryptify](https://siebebaree.com/work/enkryptify): a secrets management company Siebe founded in 2024, now closed. The team raised €225K in VC funding and had paying customers. The product helped software teams manage API keys and credentials across environments.
 - [Coinz](https://siebebaree.com/work/coinz): a Discord economy game Siebe built and ran from 2022 to 2025. It reached 1.35M users and 16K daily active users at its peak. Players could trade stocks, run businesses, hire other players and play more than 15 minigames. Coinz closed in early 2025.
 
 ## Other products

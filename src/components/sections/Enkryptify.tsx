@@ -13,7 +13,10 @@ export default function Enkryptify() {
     >
       <Reveal>
         <div className={styles.heading}>
-          <h2 id="enkryptify-title">Enkryptify</h2>
+          <div>
+            <h2 id="enkryptify-title">Enkryptify</h2>
+            <p className="mt-3 text-sm text-ink/75">Founded 2024 · Closed</p>
+          </div>
           <Image
             src="/apps/enkryptify-mark.svg"
             width={48}
@@ -27,9 +30,6 @@ export default function Enkryptify() {
               I founded Enkryptify to help software teams manage their API keys
               and credentials. We raised {ENKRYPTIFY_FUNDING} from VCs and had
               paying customers.
-            </p>
-            <p>
-              The company didn&apos;t work out, and I&apos;ve since moved on.
             </p>
             <dl className={styles.metrics}>
               <div>
