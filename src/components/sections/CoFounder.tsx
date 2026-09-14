@@ -13,7 +13,10 @@ export default function CoFounder() {
             id="cofounder-title"
             className="max-w-lg font-display text-[clamp(3rem,5.5vw,5rem)] leading-[1.04] tracking-[-0.035em]"
           >
-            Could we be <span className="italic text-accent">co-founders?</span>
+            Could we be{" "}
+            <span className="whitespace-nowrap italic text-accent">
+              co-founders?
+            </span>
           </h2>
           <div className="space-y-5 text-base leading-relaxed text-ink/80 sm:text-lg">
             <p>
