@@ -10,7 +10,7 @@ export const SITE_URL = "https://siebebaree.com";
 
 export const SITE_NAME = "Siebe Barée";
 
-export const SITE_DESCRIPTION = `Technical founder looking for a co-founder to lead the business. Built Coinz to ${COINZ_STATS.users} users and raised ${ENKRYPTIFY_FUNDING} for Enkryptify. In San Francisco for three weeks in January.`;
+export const SITE_DESCRIPTION = `Technical founder looking for someone to start a new company with. Built Coinz to ${COINZ_STATS.users} users and raised ${ENKRYPTIFY_FUNDING} for Enkryptify. In San Francisco for three weeks in January.`;
 
 export const SITE_LINKS = {
   github: "https://github.com/SiebeBaree",

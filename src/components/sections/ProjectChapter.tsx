@@ -138,8 +138,8 @@ export default function ProjectChapter({
           Looking for a technical co-founder?
         </h2>
         <p className="mt-4 text-base leading-relaxed text-ink/80">
-          I&apos;m looking for a partner to lead the business. I&apos;ll be in
-          San Francisco for three weeks in January to meet potential
+          I&apos;d love to meet someone to start a new company with. I&apos;ll
+          be in San Francisco for three weeks in January to meet potential
           co-founders.
         </p>
         <a

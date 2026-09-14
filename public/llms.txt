@@ -1,14 +1,14 @@
 # Siebe Barée
 
-> Siebe is a technical founder based in Limburg, Belgium, looking for a co-founder to lead sales, marketing or the business. He previously founded Enkryptify and built Coinz. This is his personal website at https://siebebaree.com.
+> Siebe is a technical founder based in Limburg, Belgium, looking for someone to start a new company with. He previously founded Enkryptify and built Coinz. This is his personal website at https://siebebaree.com.
 
 ## Co-founder search
 
-Siebe wants a non-technical co-founder who matches his work ethic and wants to commit full time to building a company. Siebe will lead product and engineering. He wants to find the right person first and decide what to build together. He is currently building Notchlet.
+Siebe's strengths are product and engineering. He would like to meet potential co-founders with experience in sales, marketing or running a business, who share his commitment to building a company. The plan is to get to know each other first and decide what to build together. He is currently building Notchlet.
 
 ## Featured work
 
-- [Enkryptify](https://siebebaree.com/work/enkryptify): a secrets management company Siebe founded in 2024, now closed. The team raised €225K in VC funding and had paying customers. The product helped software teams manage API keys and credentials across environments.
+- [Enkryptify](https://siebebaree.com/work/enkryptify): a secrets management company Siebe founded in 2024, now closed. The team raised $260K in VC funding and had paying customers. The product helped software teams manage API keys and credentials across environments.
 - [Coinz](https://siebebaree.com/work/coinz): a Discord economy game Siebe built and ran from 2022 to 2025. It reached 1.35M users and 16K daily active users at its peak. Players could trade stocks, run businesses, hire other players and play more than 15 minigames. Coinz closed in early 2025.
 
 ## Other products

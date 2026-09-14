@@ -82,8 +82,8 @@ export default function Hero() {
         </p>
         <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/80 sm:text-base">
           I built Coinz to {COINZ_STATS.users} users and raised{" "}
-          {ENKRYPTIFY_FUNDING} for Enkryptify. Now I&apos;m looking for a
-          partner to lead the business.
+          {ENKRYPTIFY_FUNDING} for Enkryptify. I&apos;d love to meet someone to
+          start a new company with.
         </p>
         <a
           href="#contact"

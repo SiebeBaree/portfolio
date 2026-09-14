@@ -13,23 +13,19 @@ export default function CoFounder() {
             id="cofounder-title"
             className="max-w-lg font-display text-[clamp(3rem,5.5vw,5rem)] leading-[1.04] tracking-[-0.035em]"
           >
-            I want someone I have to{" "}
-            <span className="italic text-accent">keep up with.</span>
+            Could we be <span className="italic text-accent">co-founders?</span>
           </h2>
           <div className="space-y-5 text-base leading-relaxed text-ink/80 sm:text-lg">
             <p>
-              Sales, marketing or running the business should be your strength.
-              I want a co-founder who takes ownership of finding customers and
-              turning a product into a company. I&apos;ll lead product and
-              engineering.
+              My strength is product and engineering. If yours is sales,
+              marketing or running a business, we could be a good match.
             </p>
             <p>
-              I put a huge amount of time into what I build. I want someone who
-              wants to work just as hard and make this their full-time
-              commitment.
+              I put a huge amount of time into what I build and enjoy working
+              with people who bring that same intensity.
             </p>
             <p>
-              Finding that person comes first. I want us to decide what we build
+              We can get to know each other first and decide what to build
               together.
             </p>
             <a

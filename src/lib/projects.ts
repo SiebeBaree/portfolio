@@ -13,7 +13,7 @@ export type Project = (typeof PROJECTS)[number];
 
 /** Figures confirmed by Siebe. Daily activity is the peak, not a lifetime average. */
 export const COINZ_STATS = { users: "1.35M", peakDailyActive: "16K" } as const;
-export const ENKRYPTIFY_FUNDING = "€225K";
+export const ENKRYPTIFY_FUNDING = "$260K";
 
 export function getProject(slug: string) {
   return PROJECTS.find((project) => project.slug === slug);
