@@ -89,12 +89,14 @@
   max-width: 560px;
   justify-self: end;
   border-radius: 12px;
+  filter: drop-shadow(0 14px 16px #18234340);
 }
 .screenshot {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 12px;
+  /* The asset has 92px of baked-in shadow around the window, cut off at its edge. */
+  clip-path: inset(5.186% 3.892% round 8px);
 }
 @media (max-width: 800px) {
   .section {
