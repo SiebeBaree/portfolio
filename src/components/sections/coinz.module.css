@@ -1,0 +1,254 @@
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 55px 40px 120px;
+}
+.heading {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+}
+.heading h2 {
+  font-family: var(--font-display);
+  font-size: clamp(70px, 10vw, 132px);
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+.dot {
+  color: #b66d17;
+}
+.years {
+  font-size: 13px;
+  color: #4d5a70;
+}
+.numbers {
+  position: relative;
+  margin-top: 8px;
+  padding: 25px 0 15px;
+}
+.users {
+  position: relative;
+  z-index: 1;
+}
+.users div {
+  display: flex;
+  align-items: baseline;
+  gap: 22px;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+.users dd {
+  font-family: var(--font-display);
+  font-size: clamp(130px, 22vw, 275px);
+  letter-spacing: -0.065em;
+  line-height: 1;
+}
+.users dt {
+  font-size: 18px;
+}
+.coins {
+  position: absolute;
+  right: -12px;
+  top: -20px;
+  width: 300px;
+  height: 320px;
+  pointer-events: none;
+}
+.coins img {
+  position: absolute;
+  height: auto;
+  filter: drop-shadow(8px 18px 8px #71430c26);
+}
+.coinFront {
+  width: 225px;
+  top: 85px;
+  right: -5px;
+  transform: rotate(16deg);
+}
+.coinBack {
+  width: 170px;
+  top: -2px;
+  right: 105px;
+  transform: rotate(-20deg);
+}
+.story {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 80px;
+  align-items: start;
+  margin-top: 30px;
+}
+.copy p {
+  max-width: 560px;
+  font-size: 18px;
+  line-height: 1.75;
+  color: #344156;
+}
+.copy p + p {
+  margin-top: 14px;
+}
+.daily {
+  text-align: right;
+  padding-top: 8px;
+}
+.daily div {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.daily dd {
+  font-family: var(--font-display);
+  font-size: 92px;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  color: #905818;
+}
+.daily dt {
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+.link {
+  display: inline-flex;
+  gap: 28px;
+  align-items: center;
+  padding: 13px 0 8px;
+  margin-top: 12px;
+  border-bottom: 1px solid #1c23334d;
+  font-size: 14px;
+  font-weight: 500;
+}
+.link span {
+  font-size: 20px;
+  transition: transform 180ms ease;
+}
+.link:hover span {
+  transform: translate(3px, -3px);
+}
+.link:focus-visible,
+.website a:focus-visible {
+  outline: 2px solid var(--sky-accent);
+  outline-offset: 8px;
+}
+.website {
+  max-width: 860px;
+  margin: 65px auto 0;
+  transform: rotate(-2deg);
+}
+.website a {
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 30px 45px -20px #18234355;
+  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.website a:hover {
+  transform: rotate(2deg) translateY(-5px);
+}
+.website img {
+  border-radius: 12px;
+  width: 100%;
+  height: auto;
+}
+.website figcaption {
+  margin-top: 20px;
+  font-family: var(--font-script);
+  font-size: 29px;
+  text-align: right;
+  padding-right: 18px;
+}
+@media (max-width: 900px) {
+  .coins {
+    width: 210px;
+    height: 210px;
+    right: 0;
+    top: 0;
+  }
+  .coinFront {
+    width: 150px;
+    top: 60px;
+  }
+  .coinBack {
+    width: 110px;
+    right: 90px;
+  }
+  .users dd {
+    font-size: 21vw;
+  }
+}
+@media (max-width: 700px) {
+  .section {
+    padding: 45px 24px 65px;
+  }
+  .heading h2 {
+    font-size: 75px;
+  }
+  .heading {
+    gap: 20px;
+  }
+  .numbers {
+    padding-top: 104px;
+    margin-top: 0;
+  }
+  .users dd {
+    font-size: clamp(104px, 26vw, 175px);
+  }
+  .users div {
+    gap: 16px;
+  }
+  .users dt {
+    font-size: 15px;
+  }
+  .coins {
+    width: 145px;
+    height: 125px;
+    top: 16px;
+    right: 0;
+  }
+  .coinFront {
+    width: 92px;
+    top: 43px;
+    right: 0;
+  }
+  .coinBack {
+    width: 66px;
+    right: 72px;
+    top: 10px;
+  }
+  .story {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-top: 20px;
+  }
+  .copy p {
+    font-size: 16px;
+  }
+  .daily {
+    text-align: left;
+  }
+  .daily div {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 22px;
+  }
+  .daily dd {
+    font-size: 70px;
+  }
+  .daily dt {
+    max-width: 125px;
+    margin: 0;
+  }
+  .website {
+    margin-top: 42px;
+  }
+  .website figcaption {
+    font-size: 23px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .website,
+  .website a:hover,
+  .link:hover span {
+    transform: none;
+    transition: none;
+  }
+}

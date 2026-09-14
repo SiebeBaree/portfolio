@@ -10,7 +10,6 @@ import {
 import { type CSSProperties, useEffect } from "react";
 import AsciiSignature from "@/components/hero/AsciiSignature";
 import Portrait from "@/components/hero/Portrait";
-import RoleRotator from "@/components/hero/RoleRotator";
 import { EASE_EXPO_OUT, EASE_OUT_QUINT, INTRO } from "@/lib/timeline";
 
 /*
@@ -28,7 +27,7 @@ import { EASE_EXPO_OUT, EASE_OUT_QUINT, INTRO } from "@/lib/timeline";
  * name fades in whole, then the face rises from beneath the fold and pushes
  * the words apart, settling just after the clouds finish parting.
  */
-const FACE_H = "min(78vh, 82vw)";
+const FACE_H = "var(--portrait-height)";
 // eye line, as a share of the portrait height measured up from the fold
 const EYE_LINE = 0.633;
 // widest point of the head, as a share of the portrait height, plus the
@@ -60,24 +59,26 @@ export default function Hero() {
   const gap = useTransform(
     reveal,
     (v) =>
-      `calc(${(0.24 * (1 - v)).toFixed(4)}em + min(${(78 * GAP * v).toFixed(2)}vh, ${(82 * GAP * v).toFixed(2)}vw))`,
+      `calc(${(0.24 * (1 - v)).toFixed(4)}em + var(--portrait-height) * ${(GAP * v).toFixed(4)})`,
   );
 
   return (
-    <section className="relative min-h-dvh overflow-hidden">
-      {/* the living monogram and a line for the many hats */}
+    <section className="relative min-h-dvh overflow-hidden [--portrait-height:min(68svh,118vw)] md:[--portrait-height:min(78svh,82vw)]">
+      {/* Identity stays visible while the portrait enters. */}
       <motion.header
         className="absolute inset-x-0 top-0 z-10 flex flex-col items-center gap-2 pt-6"
-        initial={{ opacity: 0, y: -8 }}
+        initial={reducedMotion ? false : { opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
-          duration: 0.9,
+          duration: reducedMotion ? 0 : 0.9,
           ease: EASE_OUT_QUINT,
-          delay: INTRO.topBarStart,
+          delay: reducedMotion ? 0 : INTRO.topBarStart,
         }}
       >
         <AsciiSignature />
-        <RoleRotator />
+        <p className="text-[11px] font-medium tracking-[0.08em] text-ink/75">
+          Founder of Enkryptify &amp; Coinz
+        </p>
       </motion.header>
 
       {/* the face, rising from beneath the fold */}
@@ -103,13 +104,13 @@ export default function Hero() {
       >
         <motion.h1
           className="flex items-center justify-center font-display leading-none tracking-tight text-ink max-md:gap-x-[0.24em]"
-          style={{ fontSize: "clamp(2.4rem, 9.5vw, 8.5rem)" }}
-          initial={{ opacity: 0, filter: "blur(10px)" }}
+          style={{ fontSize: "clamp(2.8rem, 9.5vw, 8.5rem)" }}
+          initial={reducedMotion ? false : { opacity: 0, filter: "blur(10px)" }}
           animate={{ opacity: 1, filter: "blur(0px)" }}
           transition={{
-            duration: INTRO.nameDuration,
+            duration: reducedMotion ? 0 : INTRO.nameDuration,
             ease: EASE_OUT_QUINT,
-            delay: INTRO.nameStart,
+            delay: reducedMotion ? 0 : INTRO.nameStart,
           }}
         >
           <span>Siebe</span>

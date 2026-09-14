@@ -1,127 +1,106 @@
-/*
- * The written chapters behind /work/<slug>. One entry per finished project;
- * a project missing here still renders its "Coming soon" page, though every
- * project currently has one.
- *
- * Voice rules for every story: first person, specific, no em-dashes and no
- * Oxford commas. Numbers are real. Length follows the story, so Coinz reads
- * long and BigBen reads short.
- */
-
 import type { StaticImageData } from "next/image";
 import aquasolutionsCoinz from "@/assets/work/aquasolutions-coinz.webp";
 import aquasolutionsSite from "@/assets/work/aquasolutions-site.webp";
 import coinzWebsite from "@/assets/work/coinz-website.webp";
 import eeveeChargeMap from "@/assets/work/eevee-charge-map.webp";
 import eeveePlatform from "@/assets/work/eevee-platform.webp";
-import gymlyfeWebsite from "@/assets/work/gymlyfe-website.webp";
-import habitflowSite from "@/assets/work/habitflow-site.webp";
-import jarvisOverview from "@/assets/work/jarvis-overview.webp";
-import jarvisProgress from "@/assets/work/jarvis-progress.webp";
-import kartingChase from "@/assets/work/karting-chase.webp";
-import kartingTracks from "@/assets/work/karting-tracks.webp";
-import siebegptDashboard from "@/assets/work/siebegpt-dashboard.webp";
+import { COINZ_STATS, ENKRYPTIFY_FUNDING, type Project } from "@/lib/projects";
+import enkryptifySecrets from "../../public/apps/enkryptify-secrets.webp";
 
 export type ChapterBlock =
   | { kind: "text"; body: string }
-  | { kind: "image"; image: StaticImageData; alt: string; caption: string }
-  | { kind: "video"; src: string; caption: string };
+  | { kind: "image"; image: StaticImageData; alt: string; caption: string };
 
 export type Chapter = {
-  /** the italic line under the title, where "Coming soon" used to sit */
   tagline: string;
-  /** meta description for the page */
   description: string;
-  /** short pills under the tagline */
   facts: string[];
-  /** external links, rendered as glass buttons in the header */
   links?: { label: string; href: string }[];
   story: ChapterBlock[];
 };
 
-export const CHAPTERS: Record<string, Chapter> = {
-  jarvis: {
-    tagline: "Everyone wants a Jarvis. I built mine.",
-    description:
-      "A personal assistant with exactly one user: a native desktop and mobile app that scores my days and tracks my tasks, habits and health.",
-    facts: ["Desktop and mobile app", "Built for one user"],
+/** Every public project has a complete story. Routes and content stay in sync. */
+export const CHAPTERS = {
+  enkryptify: {
+    tagline: "Building a company around a problem every software team knows.",
+    description: `Enkryptify, the secrets management company I founded. We raised ${ENKRYPTIFY_FUNDING} in VC funding and built a product with paying customers.`,
+    facts: [
+      `${ENKRYPTIFY_FUNDING} VC funding`,
+      "Paying customers",
+      "Secrets management",
+    ],
+    links: [{ label: "Visit Enkryptify", href: "https://enkryptify.com" }],
     story: [
       {
         kind: "text",
-        body: "Every other project on this page was built for other people to use. Jarvis is the opposite: a native desktop app and a mobile app with a user base of exactly one, me. It is my personal assistant, and it runs my day.",
+        body: "Software teams need API keys and credentials everywhere their code runs. Too often, those secrets end up in Slack messages, shared documents or .env files on somebody's laptop. I founded Enkryptify to give teams one place to manage them.",
       },
       {
         kind: "text",
-        body: "The heart of it is my daily score. Every day Jarvis measures three things and gives each one a weight. How many of the tasks I laid out for the day I completed, worth 40 points. How many of the habits due that day I did, worth another 40. And how I feel, worth the last 20. Together that is one number out of 100 for the day.",
+        body: `We raised ${ENKRYPTIFY_FUNDING} from VCs and built a product people paid for. Enkryptify brought together the work I love: building software, figuring out the product and building a company around it.`,
       },
       {
         kind: "image",
-        image: jarvisOverview,
-        alt: "The Jarvis overview showing a 96 percent ring for Monday, with bars for tasks 40 of 40, habits 40 of 40 and feel 16 of 20, above that day's task and habit lists",
+        image: enkryptifySecrets,
+        alt: "The Enkryptify dashboard showing secrets across production, development, CI and local environments",
         caption:
-          "A 96 on a Monday: every task done, every habit done and a 16 out of 20 on how I felt.",
+          "A team's secrets and the environments that need them, in one view.",
       },
       {
         kind: "text",
-        body: "One day on its own means very little. The reason I score them at all is the progress screen, where the days line up beside each other and the shape of a month appears: which week beat the one before it, which part of the score is carrying me and which part is quietly slipping.",
-      },
-      {
-        kind: "image",
-        image: jarvisProgress,
-        alt: "The Jarvis progress screen with a bar chart of daily scores, a weekly average of 84 that is down 15 from the week before and a breakdown showing tasks at 100 percent, habits at 93 and feel at 75",
-        caption:
-          "An 84 week, down 15 on the one before it, and the breakdown that explains why.",
+        body: "The product keeps secrets in one place and syncs them to the environments where code runs. Teams can rotate credentials automatically and lock them down when one leaks. The goal is to make managing secrets part of the way a team already works.",
       },
       {
         kind: "text",
-        body: "Around that score sits everything I used to spread across other apps. A to-do list with deadlines and priorities. A habit system for the things I want to do every day or a few times a week. And one feature that is very personal: progress photos, so I can watch how my body changes over months of showing up at the gym.",
-      },
-      {
-        kind: "text",
-        body: "Then there is the health section, which does three things. I create my own workout plans, no AI involved, and track every workout against them, so I can see how closely I follow the plan and where I can push progressive overload. There is a shopping list I fill the moment I know what I need, ready for when I am standing in the store. And because I meal prep a lot, I save every meal prep with exactly what I need to make it again, pictures included.",
-      },
-      {
-        kind: "text",
-        body: "Jarvis will never be launched, priced or marketed, and that is the point. When the only user is you, every feature can be exactly right. It is the most honest software I have ever written.",
+        body: "I left my engineering role at EEVEE Mobility to focus on Enkryptify. Having built products on my own and worked inside another team, I wanted to put that experience into a company of my own.",
       },
     ],
   },
 
-  karting: {
-    tagline: "Where I stand on every track I've ever raced.",
-    description:
-      "A web app that pulls Apex Timing data to show where I rank on every karting track I've raced, and who I still have to catch.",
-    facts: ["Web app", "Apex Timing data"],
-    links: [{ label: "Visit the app", href: "https://karting.baree.be" }],
+  coinz: {
+    tagline: "An entire economy inside Discord.",
+    description: `I built Coinz into a Discord economy game with ${COINZ_STATS.users} users and ${COINZ_STATS.peakDailyActive} daily active users at its peak.`,
+    facts: [
+      `${COINZ_STATS.users} users`,
+      `${COINZ_STATS.peakDailyActive} peak daily active`,
+      "2022 to 2025",
+    ],
+    links: [
+      { label: "View the code", href: "https://github.com/SiebeBaree/Coinz" },
+    ],
     story: [
       {
         kind: "text",
-        body: "Once a week I trade the gym for a kart and chase lap times. Every track keeps its own all-time leaderboard, and I kept asking the same two questions: where do I stand and how much time do I need to find to move up. Checking that meant digging through a different timing page for every track, so I built the answer instead.",
-      },
-      {
-        kind: "text",
-        body: "Karting pulls my results straight from the Apex Timing systems that most tracks run on, so any track I have ever driven fits on one dashboard. One card per track: my position, my best lap and the exact gap to the next name above me.",
+        body: "Coinz started with an announcement on the AquaSolutions website in December 2021. I promised an economy bot with 15 minigames and a stock market. Over the next three years, I built it into a game with 1.35 million users and 16,000 daily active users at its peak.",
       },
       {
         kind: "image",
-        image: kartingTracks,
-        alt: "The Karting dashboard listing four Belgian tracks, each with a position, a best lap and the gap to the next place",
-        caption: "One card per track, one number that matters.",
+        image: aquasolutionsCoinz,
+        alt: "The AquaSolutions website announcing Coinz in December 2021",
+        caption: "The announcement that started three years of building Coinz.",
       },
       {
         kind: "text",
-        body: "My favourite part is the chase view. Pick a track and it lays out everyone ahead of me, with a slider that answers the what-if: find two tenths and watch exactly whose names you pass. And when someone knocks me down a place I get an email about it. One per day at most, because some weekends would hurt otherwise.",
+        body: "Players could run businesses, hire other players, farm, trade stocks and cryptocurrencies or play games together. There were more than 15 minigames, including blackjack and poker. All of it lived inside the Discord servers where people already spent their time.",
+      },
+      {
+        kind: "text",
+        body: "I built the first version in Python, moved to JavaScript and eventually rewrote it in TypeScript. As the game grew, I split the workload across servers and kept improving the infrastructure. I handled the game, the systems behind it and the work of getting it in front of more people.",
       },
       {
         kind: "image",
-        image: kartingChase,
-        alt: "The chase view for E-Kart Gent showing position 8 of 97,412 and the list of drivers still ahead",
+        image: coinzWebsite,
+        alt: "An earlier Coinz website showing 850K users",
         caption:
-          "P8 of 97,412 at E-Kart Gent, with seven names still to catch.",
+          "The website at 850K users. Coinz eventually reached 1.35 million.",
       },
       {
         kind: "text",
-        body: "It was a quick build, but it changed how I drive. I stopped racing the clock and started racing names.",
+        body: "At its peak, 16,000 people were active in a single day. Even after I stepped back from development, Coinz kept running and grew from 700,000 to 1.35 million users over the following year.",
+      },
+      {
+        kind: "text",
+        body: "In early 2025, I closed Coinz to focus on Enkryptify. I'm still proud of what I built and the number of people who spent time playing it. Three years is a long time to work on one game, and I loved seeing how far I could take it.",
       },
     ],
   },
@@ -164,267 +143,6 @@ export const CHAPTERS: Record<string, Chapter> = {
       {
         kind: "text",
         body: "After a year I left, not because anything was wrong but because Enkryptify needed all of me. EEVEE is where I learned how to work in a team and what project management looks like in practice, and I am genuinely grateful for the opportunity they gave me and the fun we had along the way.",
-      },
-    ],
-  },
-
-  habitflow: {
-    tagline: "Atomic Habits, but on my laptop.",
-    description:
-      "A habit tracker web app born from Atomic Habits, built in about a week during my internship and sold as a one-time purchase.",
-    facts: ["Web app", "Next.js and Postgres", "One-time payments"],
-    links: [
-      {
-        label: "View the code",
-        href: "https://github.com/SiebeBaree/HabitFlow",
-      },
-      {
-        label: "See it archived",
-        href: "https://web.archive.org/web/20240503171319/https://habitflow.pro/",
-      },
-    ],
-    story: [
-      {
-        kind: "text",
-        body: "During my internship I read Atomic Habits, and the habit tracker in that book stuck with me: a simple grid where every day you show up earns a check. I wanted exactly that on my laptop and could not find an app that did it without turning it into a chore, so I built it myself in about a week.",
-      },
-      {
-        kind: "text",
-        body: "HabitFlow was small but it was a real product. Accounts, unlimited habits, monthly goals, history, the whole grid. I priced it the way I wish more tools were priced: pay once, use forever. Nobody needs a subscription for a habit grid. The landing page opened with the pitch I built it on: stop procrastinating, start improving.",
-      },
-      {
-        kind: "image",
-        image: habitflowSite,
-        alt: "The HabitFlow landing page with the headline Stop procrastinating, start improving, next to the habit grid",
-        caption:
-          "The landing page in 2024. The grid is the book's tracker, digitalized.",
-      },
-      {
-        kind: "text",
-        body: "I built every piece myself that week: auth, payments, the database, the emails. And then I used it daily for months, which is the only metric I really cared about. The site is offline now, but the code is public.",
-      },
-    ],
-  },
-
-  tickr: {
-    tagline: "One ticket system for every place a community lives.",
-    description:
-      "An exploration of a ticketing platform that could follow one community across its website, its Discord and its Minecraft server.",
-    facts: ["Product exploration", "Discord, web and Minecraft"],
-    story: [
-      {
-        kind: "text",
-        body: "Every gaming community I had run lived in more than one place at once: a Discord server, a website, often a Minecraft server too. When someone needed help, each of those places had its own broken way of asking for it. Tickr was my answer: one ticketing system, something like Intercom but for communities of teenagers who game, where the same ticket could follow you across all of it.",
-      },
-      {
-        kind: "text",
-        body: "I designed it around the communities I knew first, with the plan that other communities could plug it in afterwards. Tickr became a lesson in scope: connecting three platforms means three times the surface area, and I learned to weigh that cost before writing code instead of after. The logo still holds up though.",
-      },
-    ],
-  },
-
-  gymlyfe: {
-    tagline: "My first mobile app, built to fill the gym with friends.",
-    description:
-      "A Flutter social app for gym people: local groups, local gyms and friends pushing each other to show up.",
-    facts: ["Mobile app", "Flutter"],
-    story: [
-      {
-        kind: "text",
-        body: "Four years of showing up at the gym taught me that the hardest part is not the training, it is showing up alone. GymLyfe was my answer and my first mobile app: a social platform where your friends push you further, built around local groups and local gyms. Join your gym, see who trains there, go together.",
-      },
-      {
-        kind: "image",
-        image: gymlyfeWebsite,
-        alt: "The GymLyfe landing page with the headline Connect with friends and fuel your fitness goals",
-        caption: "The landing page, waiting list and all.",
-      },
-      {
-        kind: "text",
-        body: "I learned Flutter from zero to build it, then carried it into a school project where we developed it further as a team until it worked end to end. And then we did the hard, boring, correct thing: we looked at whether the market was actually asking for it, and it was not. We let it rest. I kept Flutter, the mobile instincts and a cheap early lesson in testing demand before polishing pixels.",
-      },
-    ],
-  },
-
-  "you-owe-me": {
-    tagline: "The trip was great. Settling up was not.",
-    description:
-      "A mobile app for splitting group expenses, born on a New York trip and ended early by a co-founder split.",
-    facts: ["Mobile app"],
-    story: [
-      {
-        kind: "text",
-        body: "A trip to New York with friends: everyone pays for everyone, and by the last day nobody knows who owes who what. The apps we found either cost money or buried the free tier under ads and waiting. That annoyed me enough to want to build it properly: a free, clean way to settle up with friends.",
-      },
-      {
-        kind: "text",
-        body: "I started it with a co-founder, and before the app really existed we found out we worked badly together. So I made the call early and quit while quitting was still cheap. It is the fastest lesson I have ever collected: who you build with decides more than what you build. I would much rather have learned that on a settle-up app than on something that matters.",
-      },
-    ],
-  },
-
-  coinz: {
-    tagline: "The bot that taught me how to code.",
-    description:
-      "A Discord economy bot that grew to 1.35 million users across three years, six rebuilds and around 100,000 lines of TypeScript.",
-    facts: ["Discord bot", "2022 to 2025", "1.35M users", "TypeScript"],
-    links: [
-      { label: "View the code", href: "https://github.com/SiebeBaree/Coinz" },
-      { label: "Visit the site", href: "https://coinzbot.vercel.app" },
-    ],
-    story: [
-      {
-        kind: "text",
-        body: "Coinz was announced before it existed. In December 2021 my little bot company Aqua Solutions had exactly one focus on its site: an economy bot called Coinz, marked coming soon, promising 15 minigames at release and one day a stock market. I had no idea I was describing the next three years of my life.",
-      },
-      {
-        kind: "image",
-        image: aquasolutionsCoinz,
-        alt: "The Aqua Solutions website in December 2021 announcing Coinz as coming soon",
-        caption:
-          "December 2021: Coinz promised before a line of the final bot existed.",
-      },
-      {
-        kind: "text",
-        body: "The first version was Python. Then I rebuilt it in JavaScript, because I wanted the language websites are built with, then again and again until it was fully TypeScript. Six rebuilds in total, and every one of them was me pouring everything I had just learned back into the same idea.",
-      },
-      {
-        kind: "text",
-        body: "What it became was a full economy simulation inside Discord: over 15 minigames from blackjack to poker to crash, 30 stocks and 40 cryptocurrencies with regularly updated prices, businesses that could employ other players, farming plots, a premium tier. Around 100,000 lines of TypeScript, sharded across servers and running with almost zero errors. I am still proud of how stable that codebase was.",
-      },
-      {
-        kind: "image",
-        image: coinzWebsite,
-        alt: "The Coinz website calling it the ultimate economy Discord bot, with 850K+ users on the counter",
-        caption: "The Coinz site mid-flight, 850K users and climbing.",
-      },
-      {
-        kind: "text",
-        body: "Coinz is where I learned everything at once. How to code, first of all. Then how to scale, how infrastructure behaves under real load and my first marketing and sales lessons, because a bot does not reach 700,000 users on its own. At its peak around 10,000 people used it every single day, month after month.",
-      },
-      {
-        kind: "text",
-        body: "It also taught me a business lesson the honest way: almost nobody pays for a Discord bot, and a subscription makes them angrier still. Coinz was never going to fund itself, and accepting that early freed me to treat it as what it really was, the best education I could have gotten at that age.",
-      },
-      {
-        kind: "text",
-        body: "Eventually I stepped away to focus on new things and let it run. For a full year Coinz took care of itself and grew from 700,000 users to 1.35 million without a single update, which told me more about the engineering than any code review could. But the support requests never stopped, and by early 2025 the choice was between a project that had stopped teaching me and Enkryptify, which had just started to. I shut Coinz down at 1.35 million users.",
-      },
-      {
-        kind: "text",
-        body: "Turning it off was hard. It is still the project I am most sentimental about, and everything I have built since stands on top of it.",
-      },
-    ],
-  },
-
-  siebegpt: {
-    tagline: "My own ChatGPT, built by hand.",
-    description:
-      "A ChatGPT-style AI workspace with chat, image, video, music and code generation, built when ChatGPT was brand new.",
-    facts: ["Web app", "OpenAI API", "Next.js"],
-    links: [
-      {
-        label: "View the code",
-        href: "https://github.com/SiebeBaree/SiebeGPT",
-      },
-    ],
-    story: [
-      {
-        kind: "text",
-        body: "When ChatGPT arrived I did not just want to use it, I wanted to know what building on top of these models felt like. So I built my own: SiebeGPT. And not just chat. Conversation, image generation, video, music and code generation, each in its own room of one dashboard.",
-      },
-      {
-        kind: "image",
-        image: siebegptDashboard,
-        alt: "The SiebeGPT dashboard offering conversation, image, video, music and code generation",
-        caption: "Five kinds of generation behind one login.",
-      },
-      {
-        kind: "text",
-        body: "The stack was Next.js, Postgres and the OpenAI API, with real auth in front so my credits would survive my friends. And here is the detail I enjoy most in hindsight: I built almost all of it without any AI helping me. That dates the project better than any timestamp could.",
-      },
-      {
-        kind: "video",
-        src: "/work/siebegpt-walkthrough.mp4",
-        caption: "Sending a message, back when this still felt like magic.",
-      },
-      {
-        kind: "text",
-        body: "I never planned to release it. ChatGPT was free and I would have been paying for everyone's tokens, which is a short story with a sad ending. The point was to learn how AI fits inside a product. It was my first time putting AI in an application. It would not be the last.",
-      },
-    ],
-  },
-
-  invitemanager: {
-    tagline: "Who invited who, answered properly.",
-    description:
-      "A Discord bot that tracked server invites, shipped fast into a gap when the market leader went paid.",
-    facts: ["Discord bot", "About 100 servers"],
-    story: [
-      {
-        kind: "text",
-        body: "Server owners live on one question: who is actually bringing people in. Invite tracking bots existed, but right then the big one everybody used was going paid, and I watched a gap open up in real time. I built InviteManager to fill it.",
-      },
-      {
-        kind: "text",
-        body: "Around a hundred servers picked it up, including a couple of big ones that ran their whole invite game on it. The traction stayed modest, but the lesson did not: when a gap opens you ship into it fast, because gaps do not wait. I have reused that reflex far more often than the code.",
-      },
-    ],
-  },
-
-  bigben: {
-    tagline: "Bong. Every hour, on the dot.",
-    description:
-      "A Discord bot that joins your voice channel every hour on the hour and chimes like Big Ben. Built in a day, for fun.",
-    facts: ["Discord bot", "Built in a day", "Python"],
-    links: [
-      { label: "View the code", href: "https://github.com/SiebeBaree/Big-Ben" },
-    ],
-    story: [
-      {
-        kind: "text",
-        body: "One random idea while gaming with friends: what if the voice channel had a grandfather clock. Big Ben was born in about a day. Every hour on the dot it joined the call, did its bong for ten seconds like the real tower and left without saying a word.",
-      },
-      {
-        kind: "text",
-        body: "Later it got a $sound command so anyone could upload their own mp3 to replace the chime, which is when things went properly off the rails. We laughed for weeks, then it got annoying, exactly on schedule, and I shut it down. Not everything needs a business model. Some projects just need to be funny.",
-      },
-    ],
-  },
-
-  icount: {
-    tagline: "One channel. One rule. Count.",
-    description:
-      "My first public Discord bot: a counting game that kept around 75 servers busy during their quiet hours.",
-    facts: ["Discord bot", "75 servers", "Python"],
-    links: [
-      { label: "View the code", href: "https://github.com/SiebeBaree/iCount" },
-    ],
-    story: [
-      {
-        kind: "text",
-        body: "iCount was the first bot I built for strangers. Everything before it ran in my own servers, for people I knew. This one was public: any server could invite it, connect a channel and start counting. Read the previous number, type it plus one, and if anyone slips the whole channel resets to 1.",
-      },
-      {
-        kind: "text",
-        body: "That is the entire bot, and that is exactly why it worked. About 75 servers and a couple thousand people counted together to keep their communities alive through the quiet hours. For me it was the first time my code ran somewhere I could not see it. That changes how you write it.",
-      },
-    ],
-  },
-
-  gameout: {
-    tagline: "Fifty people and no shortage of opinions.",
-    description:
-      "A Discord community I founded and led: fifty members, endless discussions and my first taste of running one.",
-    facts: ["Community", "50 members"],
-    story: [
-      {
-        kind: "text",
-        body: "GameOut is the one chapter with no code in it. It was a community I founded: about fifty of us hanging out, gaming and above all discussing. Apple versus Android could fill an entire evening, argued with the energy of a parliament and none of the consequences.",
-      },
-      {
-        kind: "text",
-        body: "It ran for about a year and then wound down, which is the natural lifespan of most communities. But founding and leading it taught me how groups of people actually behave online, and that knowledge got heavy use later when Coinz needed a support community that did not run on chaos.",
       },
     ],
   },
@@ -520,8 +238,8 @@ export const CHAPTERS: Record<string, Chapter> = {
       },
     ],
   },
-};
+} satisfies Record<Project["slug"], Chapter>;
 
-export function getChapter(slug: string): Chapter | undefined {
+export function getChapter(slug: Project["slug"]): Chapter {
   return CHAPTERS[slug];
 }
