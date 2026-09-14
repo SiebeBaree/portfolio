@@ -9,6 +9,7 @@
 
 ## Other products
 
+- [Notchlet](https://notchlet.com): an open source Mac app Siebe is building that tracks AI coding usage from the notch.
 - [Umber](https://umber.s4.nu): an open source image and video studio using your own API keys.
 - [anyfmt](https://anyfmt.xyz): an image converter that processes files in the browser, on your device.
 - [VoilaZaak](https://voilazaak.be): an experiment in using AI agents to build and sell websites for local businesses.

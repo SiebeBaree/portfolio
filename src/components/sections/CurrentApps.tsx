@@ -5,6 +5,13 @@ import { PROJECTS } from "@/lib/projects";
 
 const APPS = [
   {
+    name: "Notchlet",
+    description:
+      "An open source Mac app that tracks your AI coding usage from the notch.",
+    href: "https://notchlet.com",
+    logo: "/apps/notchlet-mark.svg",
+  },
+  {
     name: "Umber",
     description:
       "An open source image and video studio. Your API keys, your models.",
