@@ -11,69 +11,46 @@ export default function Coinz() {
     <section aria-labelledby="coinz-title" className={styles.section}>
       <Reveal>
         <div className={styles.heading}>
-          <h2 id="coinz-title">
-            Coinz<span className={styles.dot}>.</span>
-          </h2>
-          <span className={styles.years}>2022 to 2025</span>
+          <h2 id="coinz-title">Coinz</h2>
+          <Image src={coin} width={48} height={48} alt="" unoptimized />
         </div>
-        <div className={styles.numbers}>
-          <dl className={styles.users}>
-            <div>
-              <dt>users</dt>
-              <dd>{COINZ_STATS.users}</dd>
-            </div>
-          </dl>
-          <div className={styles.coins} aria-hidden="true">
-            <Image
-              src={coin}
-              alt=""
-              className={styles.coinBack}
-              sizes="200px"
-            />
-            <Image
-              src={coin}
-              alt=""
-              className={styles.coinFront}
-              sizes="280px"
-            />
-          </div>
-        </div>
-        <div className={styles.story}>
+        <div className={styles.body}>
           <div className={styles.copy}>
             <p>
-              I built an entire economy inside Discord. People could trade
-              stocks, run businesses, hire each other and play more than 15
-              minigames. Coinz grew to 1.35 million users, with 16,000 active in
-              a single day at its peak.
+              I built and ran Coinz from 2022 to 2025. It was an economy game
+              inside Discord where people could trade stocks, run businesses,
+              hire each other and play more than 15 minigames.
             </p>
             <p>
-              I spent three years building it, running the infrastructure and
-              growing the community.
+              I wrote the game, ran the infrastructure and grew the community.
             </p>
+            <dl className={styles.metrics}>
+              <div>
+                <dt>users</dt>
+                <dd>{COINZ_STATS.users}</dd>
+              </div>
+              <div>
+                <dt>daily active at its peak</dt>
+                <dd>{COINZ_STATS.peakDailyActive}</dd>
+              </div>
+            </dl>
             <StoryLink href="/work/coinz" className={styles.link}>
-              The Coinz story <span aria-hidden="true">↗</span>
+              Read the story <span aria-hidden="true">↗</span>
             </StoryLink>
           </div>
-          <dl className={styles.daily}>
-            <div>
-              <dt>daily active users at its peak</dt>
-              <dd>{COINZ_STATS.peakDailyActive}</dd>
-            </div>
-          </dl>
-        </div>
-      </Reveal>
-      <Reveal delay={0.1}>
-        <figure className={styles.website}>
-          <StoryLink href="/work/coinz" aria-label="Read the Coinz story">
+          <StoryLink
+            href="/work/coinz"
+            className={styles.imageLink}
+            aria-label="Read the Coinz story"
+          >
             <Image
               src={coinzWebsite}
-              alt="An earlier Coinz website, featuring its game character and economy game"
-              sizes="(min-width: 1200px) 840px, 90vw"
-              placeholder="blur"
+              unoptimized
+              alt="The Coinz website during its growth, showing an earlier count of 850K users"
+              className={styles.screenshot}
             />
           </StoryLink>
-          <figcaption>The website on the way to 1.35 million users.</figcaption>
-        </figure>
+        </div>
       </Reveal>
     </section>
   );

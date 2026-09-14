@@ -1,7 +1,8 @@
+/* Each featured section owns its layout; both use the same type and image scale. */
 .section {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 100px 40px 110px;
+  padding: 100px 40px;
   scroll-margin-top: 40px;
 }
 .heading {
@@ -9,32 +10,54 @@
   align-items: center;
   justify-content: space-between;
   gap: 24px;
+  margin-bottom: 40px;
 }
 .heading h2 {
   font-family: var(--font-display);
-  font-size: clamp(64px, 9.5vw, 132px);
-  line-height: 1.05;
-  letter-spacing: -0.055em;
-}
-.dot {
-  color: #3269de;
+  font-size: clamp(56px, 7.5vw, 100px);
+  line-height: 1;
+  letter-spacing: -0.045em;
 }
 .heading img {
-  width: 64px;
-  height: 64px;
-  transform: rotate(-8deg);
+  width: 48px;
+  height: 48px;
 }
-.intro {
+.body {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  align-items: start;
-  gap: 80px;
-  margin-top: 36px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 64px;
+  align-items: center;
 }
 .copy p {
-  max-width: 530px;
-  font-size: 18px;
+  max-width: 450px;
+  font-size: 17px;
   line-height: 1.75;
+  color: #344156;
+}
+.copy p + p {
+  margin-top: 16px;
+}
+.metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 40px;
+  margin: 30px 0 12px;
+}
+.metrics div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 8px;
+}
+.metrics dd {
+  font-family: var(--font-display);
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #285bb8;
+}
+.metrics dt {
+  font-size: 12px;
+  line-height: 1.5;
   color: #344156;
 }
 .link {
@@ -48,117 +71,62 @@
   font-weight: 500;
 }
 .link span {
-  transition: transform 180ms ease;
   font-size: 20px;
+  transition: transform 180ms ease;
 }
 .link:hover span {
   transform: translate(3px, -3px);
 }
 .link:focus-visible,
-.productLink:focus-visible {
+.imageLink:focus-visible {
   outline: 2px solid var(--sky-accent);
   outline-offset: 8px;
 }
-.funding {
-  text-align: right;
-}
-.funding div {
-  display: flex;
-  flex-direction: column-reverse;
-}
-.funding dt {
-  font-size: 13px;
-  letter-spacing: 0.025em;
-  margin-top: 8px;
-}
-.funding dd {
-  font-family: var(--font-display);
-  font-size: clamp(64px, 8vw, 106px);
-  line-height: 1;
-  letter-spacing: -0.045em;
-  color: #285bb8;
-}
-.product {
-  margin-top: 64px;
-  position: relative;
-}
-.product::before {
-  content: "";
-  position: absolute;
-  inset: 12% -3% 14%;
-  z-index: -1;
-  background: radial-gradient(ellipse, #4274da3d, transparent 70%);
-}
-.productLink {
+/* Keep screenshots small and untransformed so interface text stays crisp. */
+.imageLink {
   display: block;
-  border-radius: 28px;
-  transform: perspective(1800px) rotateX(4deg) rotateY(-3deg);
-  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-.productLink:hover {
-  transform: perspective(1800px) rotateX(0) rotateY(0) translateY(-5px);
+  width: 100%;
+  max-width: 560px;
+  justify-self: end;
+  border-radius: 12px;
 }
 .screenshot {
+  display: block;
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 30px 26px #1e3c6026);
+  border-radius: 12px;
+  box-shadow: 0 20px 36px -24px #18234366;
 }
-.product figcaption {
-  text-align: center;
-  font-size: 12px;
-  line-height: 1.5;
-  margin-top: 20px;
-  color: #495972;
-}
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   .section {
-    padding: 68px 24px 70px;
+    padding: 60px 24px;
+  }
+  .heading {
+    margin-bottom: 28px;
   }
   .heading h2 {
-    font-size: clamp(49px, 12vw, 80px);
+    font-size: clamp(48px, 10vw, 72px);
   }
   .heading img {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
   }
-  .intro {
+  .body {
     grid-template-columns: 1fr;
-    gap: 28px;
-    margin-top: 24px;
+    gap: 36px;
   }
   .copy p {
+    max-width: 560px;
     font-size: 16px;
   }
-  .funding {
-    text-align: left;
+  .metrics dd {
+    font-size: 56px;
   }
-  .funding div {
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 20px;
-  }
-  .funding dd {
-    font-size: 67px;
-  }
-  .funding dt {
-    max-width: 90px;
-    margin-top: 0;
-    line-height: 1.5;
-  }
-  .product {
-    margin-top: 35px;
-  }
-  .productLink {
-    transform: none;
-  }
-  .product figcaption {
-    font-size: 11px;
+  .imageLink {
+    justify-self: start;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .productLink,
-  .productLink:hover,
   .link:hover span {
     transform: none;
     transition: none;

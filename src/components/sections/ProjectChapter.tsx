@@ -8,7 +8,7 @@ import Reveal from "@/components/ui/Reveal";
 import StoryLink from "@/components/ui/StoryLink";
 import type { Chapter, ChapterBlock } from "@/lib/chapters";
 import type { Project } from "@/lib/projects";
-import { CONTACT_EMAIL } from "@/lib/site";
+import { SF_MEETUP_EMAIL_URL } from "@/lib/site";
 import { EASE_OUT_QUINT } from "@/lib/timeline";
 
 /** Shared layout for the project stories and their onward links. */
@@ -28,7 +28,7 @@ function StoryBlock({ block }: { block: ChapterBlock }) {
           <Image
             src={block.image}
             alt={block.alt}
-            placeholder="blur"
+            unoptimized
             sizes="(min-width: 768px) 672px, 100vw"
             className="w-full rounded-xl"
           />
@@ -134,14 +134,12 @@ export default function ProjectChapter({
       </div>
 
       <Reveal className="mt-16 border-t border-ink/15 pt-9">
-        <h2 className="font-display text-3xl">
-          Working on something of your own?
-        </h2>
+        <h2 className="font-display text-3xl">In San Francisco in January?</h2>
         <a
-          href={`mailto:${CONTACT_EMAIL}`}
+          href={SF_MEETUP_EMAIL_URL}
           className="focus-ring mt-4 inline-flex items-center gap-5 border-b border-ink/40 pb-2 text-sm"
         >
-          Let&apos;s meet <span aria-hidden="true">↗</span>
+          Meet me there <span aria-hidden="true">↗</span>
         </a>
       </Reveal>
       {/* Continue through the selected stories. */}

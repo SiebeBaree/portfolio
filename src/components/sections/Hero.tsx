@@ -77,8 +77,15 @@ export default function Hero() {
       >
         <AsciiSignature />
         <p className="text-[11px] font-medium tracking-[0.08em] text-ink/75">
-          Founder of Enkryptify &amp; Coinz
+          Founder &amp; software engineer
         </p>
+        <a
+          href="#contact"
+          className="focus-ring mt-2 border-b border-ink/30 pb-1 text-xs text-ink/80 transition-colors hover:text-accent"
+        >
+          San Francisco in January. Let&apos;s meet{" "}
+          <span aria-hidden="true">↗</span>
+        </a>
       </motion.header>
 
       {/* the face, rising from beneath the fold */}

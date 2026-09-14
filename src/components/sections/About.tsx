@@ -536,7 +536,7 @@ function BelgianTreats() {
 /* ---------- the hover wiring ---------- */
 
 const SCENES = {
-  ghent: BelgianTreats,
+  limburg: BelgianTreats,
   gym: BenchPress,
   karting: KartTrack,
 };
@@ -714,19 +714,18 @@ export default function About() {
         <Reveal delay={0.1}>
           <div className="mx-auto mt-10 max-w-xl space-y-5 text-base leading-relaxed text-ink/80 sm:text-lg">
             <p>
-              I&apos;m Siebe, a founder and software engineer based in{" "}
-              <Peek kind="ghent">
-                Ghent
+              I&apos;m Siebe. I live in{" "}
+              <Peek kind="limburg">
+                Limburg
                 <BelgianFlag />
               </Peek>
-              . I love building things, especially when a complicated problem
-              has a surprisingly simple solution.
+              , Belgium. I&apos;ve built games, developer tools and a VC-backed
+              company. Now I&apos;m figuring out what I want to build next.
             </p>
             <p>
               Away from my laptop, I spend a lot of time at the{" "}
               <Peek kind="gym">gym</Peek> and love going{" "}
-              <Peek kind="karting">karting</Peek>. I&apos;m always up for
-              meeting someone with an idea they can&apos;t stop thinking about.
+              <Peek kind="karting">karting</Peek>.
             </p>
           </div>
         </Reveal>

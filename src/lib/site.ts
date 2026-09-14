@@ -10,7 +10,7 @@ export const SITE_URL = "https://siebebaree.com";
 
 export const SITE_NAME = "Siebe Barée";
 
-export const SITE_DESCRIPTION = `Founder of Enkryptify and Coinz. ${ENKRYPTIFY_FUNDING} in VC funding raised for Enkryptify. Coinz reached ${COINZ_STATS.users} users and ${COINZ_STATS.peakDailyActive} daily active users at its peak. Based in Ghent, Belgium.`;
+export const SITE_DESCRIPTION = `Founder and software engineer based in Limburg, Belgium. Previously Enkryptify, with ${ENKRYPTIFY_FUNDING} in VC funding, and Coinz, with ${COINZ_STATS.users} users. In San Francisco for three weeks in January to meet founders.`;
 
 export const SITE_LINKS = {
   github: "https://github.com/SiebeBaree",
@@ -19,3 +19,5 @@ export const SITE_LINKS = {
 } as const;
 
 export const CONTACT_EMAIL = "bareesiebe@gmail.com";
+
+export const SF_MEETUP_EMAIL_URL = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Meet in San Francisco in January")}`;

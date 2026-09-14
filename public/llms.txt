@@ -1,10 +1,10 @@
 # Siebe Barée
 
-> Founder and software engineer based in Ghent, Belgium. Founder of Enkryptify and Coinz. This is his personal website at https://siebebaree.com.
+> Founder and software engineer based in Limburg, Belgium. Previously founded Enkryptify and built Coinz. He is exploring what to build next. This is his personal website at https://siebebaree.com.
 
 ## Featured work
 
-- [Enkryptify](https://siebebaree.com/work/enkryptify): a secrets management company Siebe founded. The team raised €225K in VC funding and had paying customers. The product helps software teams manage API keys and credentials across environments.
+- [Enkryptify](https://siebebaree.com/work/enkryptify): a secrets management company Siebe founded. The team raised €225K in VC funding and had paying customers. The company did not work out and Siebe has moved on. The product helped software teams manage API keys and credentials across environments.
 - [Coinz](https://siebebaree.com/work/coinz): a Discord economy game Siebe built and ran from 2022 to 2025. It reached 1.35M users and 16K daily active users at its peak. Players could trade stocks, run businesses, hire other players and play more than 15 minigames. Coinz closed in early 2025.
 
 ## Other products
@@ -23,7 +23,7 @@
 
 ## Meet Siebe
 
-Siebe wants to meet other people building companies. He enjoys the gym and karting, and is open to a coffee in Ghent or a call.
+Siebe is going to San Francisco for three weeks in January to meet founders. He is figuring out what to build next and wants to spend time with people building ambitious companies. He lives in Limburg, Belgium and enjoys the gym and karting.
 
 - Email: bareesiebe@gmail.com
 - [GitHub](https://github.com/SiebeBaree)

@@ -22,14 +22,14 @@ export type Chapter = {
 /** Every public project has a complete story. Routes and content stay in sync. */
 export const CHAPTERS = {
   enkryptify: {
-    tagline: "Building a company around a problem every software team knows.",
-    description: `Enkryptify, the secrets management company I founded. We raised ${ENKRYPTIFY_FUNDING} in VC funding and built a product with paying customers.`,
+    tagline: "The secrets management company I founded.",
+    description: `Enkryptify, the secrets management company I founded. We raised ${ENKRYPTIFY_FUNDING} in VC funding and had paying customers. The company did not work out, and I have since moved on.`,
     facts: [
       `${ENKRYPTIFY_FUNDING} VC funding`,
       "Paying customers",
       "Secrets management",
     ],
-    links: [{ label: "Visit Enkryptify", href: "https://enkryptify.com" }],
+
     story: [
       {
         kind: "text",
@@ -37,18 +37,17 @@ export const CHAPTERS = {
       },
       {
         kind: "text",
-        body: `We raised ${ENKRYPTIFY_FUNDING} from VCs and built a product people paid for. Enkryptify brought together the work I love: building software, figuring out the product and building a company around it.`,
+        body: `We raised ${ENKRYPTIFY_FUNDING} from VCs and had paying customers. The company did not work out, and I have since moved on. I am now figuring out what to build next.`,
       },
       {
         kind: "image",
         image: enkryptifySecrets,
         alt: "The Enkryptify dashboard showing secrets across production, development, CI and local environments",
-        caption:
-          "A team's secrets and the environments that need them, in one view.",
+        caption: "The Enkryptify secrets dashboard.",
       },
       {
         kind: "text",
-        body: "The product keeps secrets in one place and syncs them to the environments where code runs. Teams can rotate credentials automatically and lock them down when one leaks. The goal is to make managing secrets part of the way a team already works.",
+        body: "We built the product to keep secrets in one place and sync them to the environments where code ran. Teams could rotate credentials automatically and lock them down when one leaked.",
       },
       {
         kind: "text",
@@ -77,7 +76,7 @@ export const CHAPTERS = {
         kind: "image",
         image: aquasolutionsCoinz,
         alt: "The AquaSolutions website announcing Coinz in December 2021",
-        caption: "The announcement that started three years of building Coinz.",
+        caption: "The Coinz announcement on AquaSolutions, December 2021.",
       },
       {
         kind: "text",
