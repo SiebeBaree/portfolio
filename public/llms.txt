@@ -34,3 +34,8 @@ Siebe is going to San Francisco for three weeks in January to find a co-founder.
 - [GitHub](https://github.com/SiebeBaree)
 - [LinkedIn](https://www.linkedin.com/in/siebe-baree)
 - [X](https://x.com/BareeSiebe)
+
+## Blog
+
+- /blog: All blog posts, newest first.
+- /blog/[slug]: Individual articles by Siebe Barée.

@@ -352,8 +352,11 @@ export default function CloudLayer() {
       introRetired = true;
     }
     if (introRetired) {
+      // The page transition already supplies the returning cloud reveal.
+      // Retire this deck on desktop too: an immediate motion-value update
+      // can precede the cloud transforms subscribing during route mounting.
       intro.set(1);
-      retire();
+      setGone(true);
       return;
     }
 

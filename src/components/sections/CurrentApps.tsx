@@ -109,6 +109,12 @@ export default function CurrentApps() {
             ))}
           </div>
         </details>
+        <StoryLink
+          href="/blog"
+          className="focus-ring mt-10 inline-flex items-center gap-5 border-b border-ink/40 pb-2 text-sm"
+        >
+          Blog <span aria-hidden="true">↗</span>
+        </StoryLink>
       </Reveal>
     </section>
   );

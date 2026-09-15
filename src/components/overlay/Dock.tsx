@@ -10,12 +10,13 @@ import {
   useTransform,
 } from "motion/react";
 import { useRef, useState } from "react";
+import { useCloudNavigate } from "@/components/transition/CloudTransition";
 import { CONTACT_EMAIL, SITE_LINKS } from "@/lib/site";
 import { EASE_OUT_QUINT, SCROLL_UNLOCK_AT } from "@/lib/timeline";
 
 /*
  * The macOS dock, kept: a Liquid Glass shelf pinned to the bottom of the
- * viewport holding the four ways to reach me. Icons swell as the cursor
+ * viewport holding contact links and the blog. Icons swell as the cursor
  * nears, neighbours rising with them on a cosine-ish falloff, and each one
  * names itself in a small bubble above, the way the real dock does.
  *
@@ -40,6 +41,34 @@ type DockLink = {
 };
 
 const LINKS: DockLink[] = [
+  {
+    label: "Blog",
+    href: "/blog",
+    external: false,
+    tile: (
+      <span
+        className="dock-tile"
+        style={{
+          background: "linear-gradient(180deg, #f7bc62 0%, #e58a28 100%)",
+        }}
+      >
+        <svg
+          aria-hidden
+          viewBox="0 0 24 24"
+          style={{ width: "60%" }}
+          fill="none"
+          stroke="#ffffff"
+          strokeWidth="1.7"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <rect x="5" y="3" width="14" height="18" rx="2" />
+          <path d="M9 8h6M9 12h6M9 16h4" />
+        </svg>
+      </span>
+    ),
+  },
+
   {
     label: "Email",
     href: `mailto:${CONTACT_EMAIL}`,
@@ -135,6 +164,7 @@ function DockIcon({
   cursorX: MotionValue<number>;
   still: boolean;
 }) {
+  const navigate = useCloudNavigate();
   const ref = useRef<HTMLAnchorElement>(null);
   const [named, setNamed] = useState(false);
 
@@ -151,6 +181,19 @@ function DockIcon({
       ref={ref}
       href={link.href}
       aria-label={link.label}
+      onClick={(event) => {
+        if (
+          !link.href.startsWith("/") ||
+          event.button !== 0 ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.altKey
+        )
+          return;
+        event.preventDefault();
+        navigate(link.href);
+      }}
       target={link.external ? "_blank" : undefined}
       rel={link.external ? "noopener noreferrer" : undefined}
       className="focus-ring relative block shrink-0"
@@ -195,7 +238,7 @@ export default function Dock() {
       }}
     >
       <nav
-        aria-label="Contact links"
+        aria-label="Contact and blog links"
         className="dock-glass pointer-events-auto flex h-14 items-end gap-2 rounded-[17px] px-1.5 pb-1.5"
         onMouseMove={(e) => cursorX.set(e.clientX)}
         onMouseLeave={() => cursorX.set(Infinity)}

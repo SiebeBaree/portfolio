@@ -30,6 +30,9 @@ without colliding. Listed roughly in the order they paint.
 | Invitation to meet potential co-founders in San Francisco | `src/components/sections/Contact.tsx` |
 | Cloud page transition and its navigate hook | `src/components/transition/CloudTransition.tsx` |
 | Project pages: /work/[slug], one complete story per project | `src/app/work/[slug]/page.tsx`, `src/components/sections/ProjectChapter.tsx` |
+| Shared blog author footer | `src/components/blog/AuthorFooter.tsx`, `author-footer.module.css` |
+| Blog index, article pages and typography | `src/app/blog/` |
+| Hard-coded blog posts and registry | `src/content/blog/`, `src/lib/blog.ts` |
 | Chapter stories, one entry per project (images in `src/assets/work/` and `public/apps/`) | `src/lib/chapters.ts` |
 
 ## Shared, so coordinate before changing
