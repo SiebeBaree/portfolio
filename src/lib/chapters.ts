@@ -23,9 +23,9 @@ export type Chapter = {
 export const CHAPTERS = {
   enkryptify: {
     tagline: "The secrets management company I founded.",
-    description: `Enkryptify was the secrets management company I founded. We raised ${ENKRYPTIFY_FUNDING} in VC funding and had paying customers. Founded in 2024, now closed.`,
+    description: `Enkryptify was the secrets management company I founded. We raised ${ENKRYPTIFY_FUNDING} in funding and had paying customers. Founded in 2024, now closed.`,
     facts: [
-      `${ENKRYPTIFY_FUNDING} VC funding`,
+      `${ENKRYPTIFY_FUNDING} funding`,
       "Paying customers",
       "Secrets management",
       "Closed",

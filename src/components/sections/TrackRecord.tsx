@@ -33,7 +33,7 @@ export default function TrackRecord() {
             </div>
             <dl className={styles.metrics}>
               <div>
-                <dt>VC funding raised</dt>
+                <dt>Funding raised</dt>
                 <dd>{ENKRYPTIFY_FUNDING}</dd>
               </div>
             </dl>
