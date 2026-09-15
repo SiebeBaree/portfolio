@@ -1,6 +1,6 @@
 # Siebe Barée
 
-> Siebe is a technical founder based in Limburg, Belgium, looking for someone to start a new company with. He previously founded Enkryptify and built Coinz. This is his personal website at https://siebebaree.com.
+> Siebe is a technical founder based in Belgium, looking for someone to start a new company with. He previously founded Enkryptify and built Coinz. This is his personal website at https://siebebaree.com.
 
 ## Co-founder search
 
@@ -28,7 +28,7 @@ Siebe's strengths are product and engineering. He would like to meet potential c
 
 ## Meet Siebe
 
-Siebe is going to San Francisco for three weeks in January to find a co-founder. The exact dates are not settled. He will return to Belgium after the trip and wants to move to the US longer term to build a company there. He is open to calls before the trip. He lives in Limburg, Belgium and enjoys the gym and karting.
+Siebe is going to San Francisco for three weeks in January to find a co-founder. The exact dates are not settled. He will return to Belgium after the trip and wants to move to the US longer term to build a company there. He is open to calls before the trip. He lives in Belgium and enjoys the gym and karting.
 
 - Email: bareesiebe@gmail.com
 - [GitHub](https://github.com/SiebeBaree)

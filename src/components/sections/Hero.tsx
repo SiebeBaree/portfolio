@@ -89,8 +89,8 @@ export default function Hero() {
           href="#contact"
           className="focus-ring mt-2 border-b border-ink/30 pb-1 text-xs text-ink/80 transition-colors hover:text-accent"
         >
-          San Francisco · Three weeks in January{" "}
-          <span aria-hidden="true">↗</span>
+          Meet me in San Francisco. I&apos;ll be there for three weeks in
+          January. <span aria-hidden="true">↗</span>
         </a>
       </motion.header>
 

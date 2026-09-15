@@ -93,7 +93,7 @@ const PERSON_JSON_LD = {
   jobTitle: "Founder and software engineer",
   homeLocation: {
     "@type": "Place",
-    name: "Limburg, Belgium",
+    name: "Belgium",
   },
   sameAs: [SITE_LINKS.github, SITE_LINKS.linkedin, SITE_LINKS.x],
 };

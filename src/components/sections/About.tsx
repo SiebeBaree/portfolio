@@ -536,7 +536,7 @@ function BelgianTreats() {
 /* ---------- the hover wiring ---------- */
 
 const SCENES = {
-  limburg: BelgianTreats,
+  belgium: BelgianTreats,
   gym: BenchPress,
   karting: KartTrack,
 };
@@ -715,11 +715,11 @@ export default function About() {
           <div className="mx-auto mt-10 max-w-xl space-y-5 text-base leading-relaxed text-ink/80 sm:text-lg">
             <p>
               I&apos;m Siebe. I live in{" "}
-              <Peek kind="limburg">
-                Limburg
+              <Peek kind="belgium">
+                Belgium
                 <BelgianFlag />
               </Peek>
-              , Belgium. Right now I&apos;m building{" "}
+              . Right now I&apos;m building{" "}
               <a
                 href="https://notchlet.com"
                 target="_blank"
