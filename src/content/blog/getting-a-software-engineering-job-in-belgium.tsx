@@ -21,7 +21,7 @@ export const post = {
         </p>
         <p>
           {
-            "During my studies, I built more than 15 projects. One already had around 700,000 users when I applied. I continued working on it, and it eventually reached 1.35 million users before I shut it down. My GitHub was active afted I graduated because programming was something I kept doing outside of the classroom."
+            "During my studies, I built more than 15 projects. One already had around 700,000 users when I applied. I continued working on it, and it eventually reached 1.35 million users before I shut it down. My GitHub was active after I graduated because programming was something I kept doing outside of the classroom."
           }
         </p>
         <p>
