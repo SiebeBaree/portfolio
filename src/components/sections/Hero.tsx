@@ -10,14 +10,14 @@ import {
 import { type CSSProperties, useEffect } from "react";
 import AsciiSignature from "@/components/hero/AsciiSignature";
 import Portrait from "@/components/hero/Portrait";
-import RoleRotator from "@/components/hero/RoleRotator";
+import { COINZ_STATS, ENKRYPTIFY_FUNDING } from "@/lib/projects";
 import { EASE_EXPO_OUT, EASE_OUT_QUINT, INTRO } from "@/lib/timeline";
 
 /*
  * The portrait dominates the hero: shoulders end exactly on the fold, and the
  * name sits at eye level. `FACE_H` is the single size the portrait, the name
  * gap and the name's vertical position are all derived from, so they can
- * never drift apart. (78vh tall unless the viewport is too narrow, then
+ * never drift apart. (68svh tall unless the viewport is too narrow, then
  * width-constrained.)
  *
  * The three ratios below are measured off the photo's alpha channel and are
@@ -28,7 +28,7 @@ import { EASE_EXPO_OUT, EASE_OUT_QUINT, INTRO } from "@/lib/timeline";
  * name fades in whole, then the face rises from beneath the fold and pushes
  * the words apart, settling just after the clouds finish parting.
  */
-const FACE_H = "min(78vh, 82vw)";
+const FACE_H = "var(--portrait-height)";
 // eye line, as a share of the portrait height measured up from the fold
 const EYE_LINE = 0.633;
 // widest point of the head, as a share of the portrait height, plus the
@@ -60,24 +60,38 @@ export default function Hero() {
   const gap = useTransform(
     reveal,
     (v) =>
-      `calc(${(0.24 * (1 - v)).toFixed(4)}em + min(${(78 * GAP * v).toFixed(2)}vh, ${(82 * GAP * v).toFixed(2)}vw))`,
+      `calc(${(0.24 * (1 - v)).toFixed(4)}em + var(--portrait-height) * ${(GAP * v).toFixed(4)})`,
   );
 
   return (
-    <section className="relative min-h-dvh overflow-hidden">
-      {/* the living monogram and a line for the many hats */}
+    <section className="relative min-h-[max(100svh,740px)] overflow-hidden [--portrait-height:min(62svh,118vw)] md:min-h-[max(100svh,700px)] md:[--portrait-height:min(68svh,82vw)]">
+      {/* Identity stays visible while the portrait enters. */}
       <motion.header
-        className="absolute inset-x-0 top-0 z-10 flex flex-col items-center gap-2 pt-6"
-        initial={{ opacity: 0, y: -8 }}
+        className="absolute inset-x-0 top-0 z-10 flex flex-col items-center gap-2 px-6 pt-6 text-center"
+        initial={reducedMotion ? false : { opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
-          duration: 0.9,
+          duration: reducedMotion ? 0 : 0.9,
           ease: EASE_OUT_QUINT,
-          delay: INTRO.topBarStart,
+          delay: reducedMotion ? 0 : INTRO.topBarStart,
         }}
       >
         <AsciiSignature />
-        <RoleRotator />
+        <p className="mt-3 max-w-2xl font-display text-[clamp(2rem,4vw,3.5rem)] leading-[1.05] tracking-tight">
+          I&apos;m looking for a co-founder.
+        </p>
+        <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/80 sm:text-base">
+          I built Coinz to {COINZ_STATS.users} users and raised{" "}
+          {ENKRYPTIFY_FUNDING} for Enkryptify. I&apos;d love to meet someone to
+          start a new company with.
+        </p>
+        <a
+          href="#contact"
+          className="focus-ring mt-2 border-b border-ink/30 pb-1 text-xs text-ink/80 transition-colors hover:text-accent"
+        >
+          Meet me in San Francisco. I&apos;ll be there for three weeks in
+          January. <span aria-hidden="true">↗</span>
+        </a>
       </motion.header>
 
       {/* the face, rising from beneath the fold */}
@@ -103,13 +117,13 @@ export default function Hero() {
       >
         <motion.h1
           className="flex items-center justify-center font-display leading-none tracking-tight text-ink max-md:gap-x-[0.24em]"
-          style={{ fontSize: "clamp(2.4rem, 9.5vw, 8.5rem)" }}
-          initial={{ opacity: 0, filter: "blur(10px)" }}
+          style={{ fontSize: "clamp(2.8rem, 9.5vw, 8.5rem)" }}
+          initial={reducedMotion ? false : { opacity: 0, filter: "blur(10px)" }}
           animate={{ opacity: 1, filter: "blur(0px)" }}
           transition={{
-            duration: INTRO.nameDuration,
+            duration: reducedMotion ? 0 : INTRO.nameDuration,
             ease: EASE_OUT_QUINT,
-            delay: INTRO.nameStart,
+            delay: reducedMotion ? 0 : INTRO.nameStart,
           }}
         >
           <span>Siebe</span>

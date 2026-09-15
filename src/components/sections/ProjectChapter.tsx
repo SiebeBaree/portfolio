@@ -2,26 +2,16 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
-import { useCloudNavigate } from "@/components/transition/CloudTransition";
 import Eyebrow from "@/components/ui/Eyebrow";
 import ProjectLogo from "@/components/ui/ProjectLogo";
 import Reveal from "@/components/ui/Reveal";
+import StoryLink from "@/components/ui/StoryLink";
 import type { Chapter, ChapterBlock } from "@/lib/chapters";
 import type { Project } from "@/lib/projects";
+import { COFOUNDER_EMAIL_URL } from "@/lib/site";
 import { EASE_OUT_QUINT } from "@/lib/timeline";
 
-/*
- * The /work/<slug> page body for a finished chapter. The header rises in
- * just after the transition clouds part, exactly like the "Coming soon"
- * page did, and the story reveals block by block on scroll. The header is
- * centered like every section opener; the prose itself is left-aligned
- * because some chapters run long.
- *
- * The footer keeps the reader inside the story: one card leads to the next
- * chapter (the next older project that has one) and a small link goes back
- * home, both through the cloud transition.
- */
-
+/** Shared layout for the project stories and their onward links. */
 function StoryBlock({ block }: { block: ChapterBlock }) {
   if (block.kind === "text") {
     return (
@@ -38,7 +28,7 @@ function StoryBlock({ block }: { block: ChapterBlock }) {
           <Image
             src={block.image}
             alt={block.alt}
-            placeholder="blur"
+            unoptimized
             sizes="(min-width: 768px) 672px, 100vw"
             className="w-full rounded-xl"
           />
@@ -49,32 +39,6 @@ function StoryBlock({ block }: { block: ChapterBlock }) {
       </figure>
     );
   }
-
-  return <StoryVideo src={block.src} caption={block.caption} />;
-}
-
-/** the SiebeGPT walkthrough: plays on its own unless motion is reduced */
-function StoryVideo({ src, caption }: { src: string; caption: string }) {
-  const reducedMotion = useReducedMotion();
-  return (
-    <figure className="py-2">
-      <div className="glass-raised overflow-hidden rounded-2xl p-2">
-        {/* biome-ignore lint/a11y/useMediaCaption: a silent screen recording, described by the figcaption */}
-        <video
-          src={src}
-          autoPlay={!reducedMotion}
-          muted
-          loop
-          playsInline
-          controls={Boolean(reducedMotion)}
-          className="w-full rounded-xl"
-        />
-      </div>
-      <figcaption className="mt-3 text-center text-[13px] text-muted">
-        {caption}
-      </figcaption>
-    </figure>
-  );
 }
 
 export default function ProjectChapter({
@@ -84,23 +48,28 @@ export default function ProjectChapter({
 }: {
   project: Project;
   chapter: Chapter;
-  /** the next older project that has a chapter, if any */
+  /** the next project in the selected story order */
   next: Project | null;
 }) {
-  const navigate = useCloudNavigate();
-
+  const reducedMotion = useReducedMotion();
   return (
     <main className="mx-auto flex min-h-dvh w-full max-w-2xl flex-col px-6 py-24 sm:px-10">
       {/* the header, rising in as the transition clouds part */}
       <motion.div
         className="flex flex-col items-center text-center"
-        initial={{ opacity: 0, y: 22, filter: "blur(8px)" }}
+        initial={
+          reducedMotion ? false : { opacity: 0, y: 22, filter: "blur(8px)" }
+        }
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        transition={{ duration: 0.8, ease: EASE_OUT_QUINT, delay: 0.35 }}
+        transition={{
+          duration: reducedMotion ? 0 : 0.8,
+          ease: EASE_OUT_QUINT,
+          delay: reducedMotion ? 0 : 0.35,
+        }}
       >
         <ProjectLogo project={project} className="h-14 w-14" size={56} />
         <div className="mt-6">
-          <Eyebrow>{`Previous work · est. ${project.year}`}</Eyebrow>
+          <Eyebrow>{`Started in ${project.year}`}</Eyebrow>
         </div>
         <h1 className="mt-3 font-display text-5xl tracking-tight text-ink sm:text-7xl">
           {project.title}
@@ -113,7 +82,7 @@ export default function ProjectChapter({
           {chapter.facts.map((fact) => (
             <li
               key={fact}
-              className="glass rounded-full px-3.5 py-1.5 text-[12px] font-medium text-ink/80"
+              className="px-3 py-1 text-[13px] font-medium text-ink/80"
             >
               {fact}
             </li>
@@ -164,13 +133,28 @@ export default function ProjectChapter({
         ))}
       </div>
 
-      {/* onwards: the next chapter, or just home */}
+      <Reveal className="mt-16 border-t border-ink/15 pt-9">
+        <h2 className="font-display text-3xl">
+          Looking for a technical co-founder?
+        </h2>
+        <p className="mt-4 text-base leading-relaxed text-ink/80">
+          I&apos;d love to meet someone to start a new company with. I&apos;ll
+          be in San Francisco for three weeks in January to meet potential
+          co-founders.
+        </p>
+        <a
+          href={COFOUNDER_EMAIL_URL}
+          className="focus-ring mt-4 inline-flex items-center gap-5 border-b border-ink/40 pb-2 text-sm"
+        >
+          Let&apos;s talk <span aria-hidden="true">↗</span>
+        </a>
+      </Reveal>
+      {/* Continue through the selected stories. */}
       <div className="mt-16 flex flex-col items-center gap-6">
         {next && (
           <Reveal className="w-full">
-            <button
-              type="button"
-              onClick={() => navigate(`/work/${next.slug}`)}
+            <StoryLink
+              href={`/work/${next.slug}`}
               className="glass-control focus-ring group flex w-full cursor-pointer items-center gap-4 rounded-2xl p-5 text-left"
             >
               <ProjectLogo project={next} className="h-11 w-11" size={44} />
@@ -186,17 +170,16 @@ export default function ProjectChapter({
               >
                 →
               </span>
-            </button>
+            </StoryLink>
           </Reveal>
         )}
-        <button
-          type="button"
-          onClick={() => navigate("/")}
+        <StoryLink
+          href="/"
           className="glass-control focus-ring inline-flex cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 text-[13px] font-medium text-ink"
         >
           <span aria-hidden>←</span>
           Back home
-        </button>
+        </StoryLink>
       </div>
     </main>
   );

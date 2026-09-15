@@ -14,157 +14,12 @@ import {
   useRef,
   useState,
 } from "react";
-import Eyebrow from "@/components/ui/Eyebrow";
 import Reveal from "@/components/ui/Reveal";
 import { onAmbientTick } from "@/lib/ambient-ticker";
 
-/*
- * About: who Siebe is when the laptop is closed. Plain text floating on the
- * sky, no panel behind it, kept deliberately short. Three touches carry the
- * section:
- *
- *  1. Five words open a tiny scene while hovered: "Ghent" lays out the best
- *     of Belgium, "alarm" rings an alarm clock, "calendar" unfolds an
- *     absurdly packed Google Calendar day, "gym" bench-presses and
- *     "karting" runs a top-down kart race. The scenes float over the
- *     surrounding text on purpose and vanish on unhover. No other word is
- *     highlighted.
- *  2. Line-drawn birds drift in the whitespace around the copy, in the same
- *     single-weight stroke as the placeholder portrait.
- *  3. The sign-off is the full name in the script face, writing itself in
- *     left to right like a signature when it scrolls into view.
- */
-
+/** Personal illustrations appear only while their word is hovered or focused. */
 const INK = "#1c2333";
 
-/* ---------- the five hover scenes ---------- */
-
-/** a twin-bell alarm clock mid-ring, hands frozen at 5:00 */
-function AlarmClock() {
-  return (
-    <motion.svg
-      aria-hidden
-      viewBox="0 0 80 80"
-      className="block w-[86px]"
-      style={{
-        color: INK,
-        filter: "drop-shadow(0 4px 10px rgb(28 41 90 / 0.28))",
-      }}
-      animate={{ rotate: [-5, 5] }}
-      transition={{ duration: 0.11, repeat: Infinity, repeatType: "mirror" }}
-    >
-      {/* ring shockwaves, kept clear of the bells */}
-      <motion.g
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        fill="none"
-        animate={{ opacity: [0, 1, 0] }}
-        transition={{ duration: 0.5, repeat: Infinity }}
-      >
-        <path d="M6 30 A32 32 0 0 1 12 15" />
-        <path d="M74 30 A32 32 0 0 0 68 15" />
-      </motion.g>
-      {/* twin bells above the face, with little stems down to the body */}
-      <g stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-        <path d="M29 23 L33 29" />
-        <path d="M51 23 L47 29" />
-      </g>
-      <g
-        fill="rgb(255 255 255 / 0.95)"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinejoin="round"
-      >
-        <path d="M16 18 A10 10 0 0 1 36 18 Z" transform="rotate(-20 26 18)" />
-        <path d="M44 18 A10 10 0 0 1 64 18 Z" transform="rotate(20 54 18)" />
-      </g>
-      {/* body */}
-      <circle
-        cx="40"
-        cy="46"
-        r="20"
-        fill="rgb(255 255 255 / 0.95)"
-        stroke="currentColor"
-        strokeWidth="3"
-      />
-      {/* face ticks */}
-      <g stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-        <path d="M40 30.5 L40 33.5" />
-        <path d="M40 58.5 L40 61.5" />
-        <path d="M24.5 46 L27.5 46" />
-        <path d="M52.5 46 L55.5 46" />
-      </g>
-      {/* five in the morning, weekends included */}
-      <g stroke="currentColor" strokeLinecap="round">
-        <path d="M40 46 L44.6 53.9" strokeWidth="3" />
-        <path d="M40 46 L40 33.5" strokeWidth="2" />
-      </g>
-      <circle cx="40" cy="46" r="1.8" fill="currentColor" />
-      {/* legs */}
-      <path
-        d="M27 63 L22 70 M53 63 L58 70"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-    </motion.svg>
-  );
-}
-
-/** one day in the calendar, booked wall to wall, silly blocks included */
-const DAY: [string, string, string][] = [
-  ["05:00", "Wake up", "#4285f4"],
-  ["05:15", "Code a little", "#8e24aa"],
-  ["06:30", "Gym", "#34a853"],
-  ["08:00", "Deep work", "#8e24aa"],
-  ["11:00", "Meetings", "#fbbc04"],
-  ["12:30", "Eat, finally", "#ea4335"],
-  ["13:00", "More deep work", "#8e24aa"],
-  ["16:00", "Toilet time", "#795548"],
-  ["19:00", "Karting", "#f4511e"],
-  ["21:00", "Plan tomorrow", "#4285f4"],
-  ["21:30", "Sleep, fast", "#616161"],
-];
-
-function CalendarDay() {
-  return (
-    <motion.span
-      aria-hidden
-      className="block w-[176px] rounded-xl border border-line/70 bg-white p-2 shadow-[0_18px_40px_-18px_rgb(28_41_90/0.45)]"
-      initial="hidden"
-      animate="show"
-      variants={{ show: { transition: { staggerChildren: 0.03 } } }}
-    >
-      <span className="mb-1.5 flex items-center gap-1.5 px-0.5">
-        <span className="grid h-5 w-5 place-items-center rounded-full bg-[#4285f4] text-[9px] font-semibold text-white">
-          18
-        </span>
-        <span className="text-[9px] font-medium tracking-wide text-[#5f6368] uppercase">
-          Tuesday
-        </span>
-      </span>
-      <span className="flex flex-col gap-[2px]">
-        {DAY.map(([time, title, color]) => (
-          <motion.span
-            key={time}
-            className="flex items-baseline gap-1 rounded-[4px] px-1.5 py-[2px] text-white"
-            style={{ backgroundColor: color }}
-            variants={{
-              hidden: { opacity: 0, x: -5 },
-              show: { opacity: 1, x: 0 },
-            }}
-          >
-            <span className="text-[7px] font-semibold opacity-85">{time}</span>
-            <span className="truncate text-[8px] font-medium">{title}</span>
-          </motion.span>
-        ))}
-      </span>
-    </motion.span>
-  );
-}
-
-/** a stick lifter working through reps, on his own solid little cloud */
 function BenchPress() {
   const armUp = "M66 54 L68 42 L70 30";
   const armDown = "M66 54 L76 50 L70 44";
@@ -680,10 +535,8 @@ function BelgianTreats() {
 
 /* ---------- the hover wiring ---------- */
 
-const SCENES: Record<string, () => ReactNode> = {
-  ghent: BelgianTreats,
-  alarm: AlarmClock,
-  calendar: CalendarDay,
+const SCENES = {
+  belgium: BelgianTreats,
   gym: BenchPress,
   karting: KartTrack,
 };
@@ -696,11 +549,16 @@ function Peek({
   children: ReactNode;
 }) {
   const [hover, setHover] = useState(false);
+  const reducedMotion = useReducedMotion();
   const Scene = SCENES[kind];
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: hover only toggles a decorative preview, the word is not a control
-    <span
-      className="relative inline-block"
+    <button
+      type="button"
+      aria-label={`Show ${kind} illustration`}
+      className="focus-ring relative inline-block"
+      onFocus={() => setHover(true)}
+      onBlur={() => setHover(false)}
+      onClick={() => setHover(!hover)}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
@@ -708,7 +566,7 @@ function Peek({
         {children}
       </span>
       <AnimatePresence>
-        {hover && (
+        {hover && !reducedMotion && (
           <motion.span
             className="pointer-events-none absolute bottom-full left-1/2 z-30 block pb-2"
             initial={{ opacity: 0, y: 10, scale: 0.85, x: "-50%" }}
@@ -720,7 +578,7 @@ function Peek({
           </motion.span>
         )}
       </AnimatePresence>
-    </span>
+    </button>
   );
 }
 
@@ -811,7 +669,7 @@ export default function About() {
     <section
       ref={sectionRef}
       id="about"
-      className="mx-auto flex min-h-dvh w-full max-w-3xl flex-col items-center justify-center px-6 py-24 text-center sm:px-10"
+      className="mx-auto flex w-full max-w-3xl flex-col items-center justify-center px-6 py-24 text-center sm:px-10"
     >
       <div className="relative">
         {/* the flock, scattered through the whitespace around the copy */}
@@ -848,36 +706,35 @@ export default function About() {
         />
 
         <Reveal>
-          <Eyebrow>About me</Eyebrow>
           <h2 className="mt-3 font-display text-4xl tracking-tight text-ink sm:text-6xl">
-            Hi there, I'm Siebe.
+            A little about me.
           </h2>
         </Reveal>
 
         <Reveal delay={0.1}>
           <div className="mx-auto mt-10 max-w-xl space-y-5 text-base leading-relaxed text-ink/80 sm:text-lg">
             <p>
-              I'm 23 and live in{" "}
-              <Peek kind="ghent">
-                Ghent
+              I&apos;m Siebe. I live in{" "}
+              <Peek kind="belgium">
+                Belgium
                 <BelgianFlag />
               </Peek>
-              . I'm a morning person, my <Peek kind="alarm">alarm</Peek> goes
-              off at 5 AM, even on weekends, I make my bed and immediately jump
-              to my laptop and code a little before starting my day. I'm also a
-              control freak, everything I do is in my{" "}
-              <Peek kind="calendar">calendar</Peek>, it's important for me to
-              stay on task and to plan everything ahead. Without my calendar,
-              I'm worthless.
+              . Right now I&apos;m building{" "}
+              <a
+                href="https://notchlet.com"
+                target="_blank"
+                rel="noreferrer"
+                className="focus-ring underline decoration-ink/30 underline-offset-4"
+              >
+                Notchlet
+              </a>
+              , a Mac app for keeping track of AI coding usage.
             </p>
             <p>
-              I also love the <Peek kind="gym">gym</Peek>. I started as the
-              skinniest guy in any room, 1.90 m and 57 kg, and I've been
-              building my body up ever since. I'm proud of it but I'm never
-              satisfied. Once a week, I swap the gym for my other hobby:{" "}
+              Away from my laptop, I spend a lot of time at the{" "}
+              <Peek kind="gym">gym</Peek> and love going{" "}
               <Peek kind="karting">karting</Peek>.
             </p>
-            <p>The day I stop improving is the day I stop living.</p>
           </div>
         </Reveal>
 

@@ -1,31 +1,36 @@
 # Siebe Barée
 
-> Founder and software engineer from Ghent, Belgium. Founder of Enkryptify. Builds free open source tools that feel as good as they work. This site is his personal portfolio at https://siebebaree.com.
+> Siebe is a technical founder based in Belgium, looking for someone to start a new company with. He previously founded Enkryptify and built Coinz. This is his personal website at https://siebebaree.com.
 
-Siebe Barée has been building software since owning a Minecraft server community at twelve. He went from Discord bots as a teenager to founding Enkryptify, a secrets management platform, and now ships small free tools alongside it.
+## Co-founder search
 
-## Current apps
+Siebe's strengths are product and engineering. He would like to meet potential co-founders with experience in sales, marketing or running a business, who share his commitment to building a company. The plan is to get to know each other first and decide what to build together. He is currently building Notchlet.
 
-- [Umber](https://umber.s4.nu): a free open source AI image and video studio for macOS, Windows and Linux. Bring your own API keys, pay the labs at cost and keep every creation on your device. MIT licensed.
-- [anyfmt](https://anyfmt.xyz): an image converter that runs entirely in the browser tab. Nothing is uploaded, so HEIC files, heavy screenshots and photos with GPS metadata never leave the laptop.
-- [OneTimePic](https://onetimepic.xyz): sends a photo that opens exactly once. The image is encrypted in the browser and the file is gone after that single view.
+## Featured work
 
-## Selected work
+- [Enkryptify](https://siebebaree.com/work/enkryptify): a secrets management company Siebe founded in 2024, now closed. The team raised $260K in funding and had paying customers. The product helped software teams manage API keys and credentials across environments.
+- [Coinz](https://siebebaree.com/work/coinz): a Discord economy game Siebe built and ran from 2022 to 2025. It reached 1.35M users and 16K daily active users at its peak. Players could trade stocks, run businesses, hire other players and play more than 15 minigames. Coinz closed in early 2025.
 
-- [Enkryptify](https://siebebaree.com/work/enkryptify): the company he founded in 2024, a secrets management platform.
-- [EEVEE Mobility](https://siebebaree.com/work/eevee-mobility): software engineering work on an EV charging platform, started in 2024.
-- [Coinz](https://siebebaree.com/work/coinz): a Discord economy bot that grew to 1.35 million users across three years, six rebuilds and around 100,000 lines of TypeScript.
-- [SiebeGPT](https://siebebaree.com/work/siebegpt): a ChatGPT-style AI workspace with chat, image, video, music and code generation, built when ChatGPT was brand new.
-- [HabitFlow](https://siebebaree.com/work/habitflow): a habit tracker web app born from Atomic Habits, built in about a week and sold as a one-time purchase.
-- [Karting](https://siebebaree.com/work/karting): a web app that pulls Apex Timing data to show where he ranks on every karting track he has raced.
-- [BotHosted](https://siebebaree.com/work/bothosted): his teenage bot company, Discord bots built and hosted for a fee with a team of five.
+## Other products
 
-The full list of nineteen projects, from a 2013 Minecraft community to today, lives at https://siebebaree.com with a written chapter for each at https://siebebaree.com/work/[slug].
+- [Notchlet](https://notchlet.com): an open source Mac app Siebe is building that tracks AI coding usage from the notch.
+- [Umber](https://umber.s4.nu): an open source image and video studio using your own API keys.
+- [anyfmt](https://anyfmt.xyz): an image converter that processes files in the browser, on your device.
+- [VoilaZaak](https://voilazaak.be): an experiment in using AI agents to build and sell websites for local businesses.
 
-## Links
+## Earlier work
 
+- [EEVEE Mobility](https://siebebaree.com/work/eevee-mobility): engineering work on an electric fleet management platform, started in 2024.
+- [AquaSolutions](https://siebebaree.com/work/aquasolutions): a Discord bot company and the beginning of Coinz.
+- [BotHosted](https://siebebaree.com/work/bothosted): a small hosting business started in 2019.
+- [MaxerG](https://siebebaree.com/work/maxerg): a Minecraft server and community started in 2016.
+- [Bookmarks](https://siebebaree.com/work/bookmarks): handmade bookmarks sold at school in 2013.
+
+## Meet Siebe
+
+Siebe is going to San Francisco for three weeks in January to find a co-founder. The exact dates are not settled. He will return to Belgium after the trip and wants to move to the US longer term to build a company there. He is open to calls before the trip. He lives in Belgium and enjoys the gym and karting.
+
+- Email: bareesiebe@gmail.com
 - [GitHub](https://github.com/SiebeBaree)
 - [LinkedIn](https://www.linkedin.com/in/siebe-baree)
 - [X](https://x.com/BareeSiebe)
-- [Enkryptify](https://enkryptify.com)
-- Email: bareesiebe@gmail.com

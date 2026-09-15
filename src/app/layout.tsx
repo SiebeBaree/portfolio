@@ -91,10 +91,9 @@ const PERSON_JSON_LD = {
   url: SITE_URL,
   image: `${SITE_URL}/portrait.webp`,
   jobTitle: "Founder and software engineer",
-  worksFor: {
-    "@type": "Organization",
-    name: "Enkryptify",
-    url: "https://enkryptify.com",
+  homeLocation: {
+    "@type": "Place",
+    name: "Belgium",
   },
   sameAs: [SITE_LINKS.github, SITE_LINKS.linkedin, SITE_LINKS.x],
 };
