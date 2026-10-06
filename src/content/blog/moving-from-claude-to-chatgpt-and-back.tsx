@@ -16,7 +16,7 @@ export const post = {
         </p>
         <p>
           {
-            "This is how I left, why I left, and why I'm pretty sure I'm staying this time."
+            "This is how I left, why I left and why I'm pretty sure I'm staying this time."
           }
         </p>
 
