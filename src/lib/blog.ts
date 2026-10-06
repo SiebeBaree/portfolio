@@ -1,5 +1,6 @@
 import type { ComponentType } from "react";
 import { post as gettingAJob } from "@/content/blog/getting-a-software-engineering-job-in-belgium";
+import { post as claudeAndBack } from "@/content/blog/moving-from-claude-to-chatgpt-and-back";
 
 export type BlogPost = {
   slug: string;
@@ -11,8 +12,8 @@ export type BlogPost = {
 };
 
 /** Register posts here. The index and sitemap follow automatically. */
-export const BLOG_POSTS: BlogPost[] = [gettingAJob].sort((a, b) =>
-  b.date.localeCompare(a.date),
+export const BLOG_POSTS: BlogPost[] = [gettingAJob, claudeAndBack].sort(
+  (a, b) => b.date.localeCompare(a.date),
 );
 
 export function getBlogPost(slug: string) {
