@@ -125,7 +125,7 @@ export default function ProjectChapter({
         </h2>
         <p className="mt-4 text-base leading-relaxed text-ink/80">
           I&apos;d love to meet someone to start a new company with. I&apos;ll
-          be in San Francisco for three weeks in January to meet potential
+          be in San Francisco from November 3 to December 3 to meet potential
           co-founders.
         </p>
         <a

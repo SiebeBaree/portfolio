@@ -20,17 +20,13 @@ export default function Contact() {
         <div className="mt-9 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between sm:gap-12">
           <div className="max-w-lg space-y-5 text-base leading-relaxed text-ink/80 sm:text-lg">
             <p>
-              I&apos;ll be there for three weeks in January to find a
-              co-founder. If you&apos;re strong on the business side and looking
-              for someone to build with, I&apos;d like to meet you.
+              I&apos;m there from November 3 to December 3. If you&apos;re
+              strong on the business side and want to start something, I&apos;d
+              like to meet you.
             </p>
             <p>
               Tell me what you&apos;ve worked on and what you&apos;d want to
               build. We can start with a call before the trip.
-            </p>
-            <p className="text-sm leading-relaxed">
-              I&apos;ll return to Belgium afterwards. Longer term, I want to
-              move to the US and build a company there.
             </p>
           </div>
           <div className="flex shrink-0 flex-col items-start gap-4">
@@ -38,7 +34,7 @@ export default function Contact() {
               href={SF_MEETUP_EMAIL_URL}
               className="focus-ring group flex w-fit items-center gap-6 border-b border-ink/50 py-3 text-base"
             >
-              Meet in January{" "}
+              Meet in November{" "}
               <span
                 aria-hidden="true"
                 className="text-2xl transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1"

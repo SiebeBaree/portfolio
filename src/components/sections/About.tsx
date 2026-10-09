@@ -719,16 +719,16 @@ export default function About() {
                 Belgium
                 <BelgianFlag />
               </Peek>
-              . Right now I&apos;m building{" "}
-              <a
-                href="https://notchlet.com"
-                target="_blank"
-                rel="noreferrer"
-                className="focus-ring underline decoration-ink/30 underline-offset-4"
-              >
-                Notchlet
-              </a>
-              , a Mac app for keeping track of AI coding usage.
+              . I taught myself to code and I&apos;ve been building products
+              ever since. Coinz showed me what it takes to grow something to
+              over a million users. Enkryptify showed me how to raise money and
+              what it feels like when a company doesn&apos;t work out.
+            </p>
+            <p>
+              I build every day. What I enjoy most is taking something
+              complicated and making it simple enough to feel obvious. I want a
+              co-founder who is as serious about the business as I am about the
+              product.
             </p>
             <p>
               Away from my laptop, I spend a lot of time at the{" "}

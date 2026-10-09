@@ -10,7 +10,6 @@ import {
 import { type CSSProperties, useEffect } from "react";
 import AsciiSignature from "@/components/hero/AsciiSignature";
 import Portrait from "@/components/hero/Portrait";
-import { COINZ_STATS, ENKRYPTIFY_FUNDING } from "@/lib/projects";
 import { EASE_EXPO_OUT, EASE_OUT_QUINT, INTRO } from "@/lib/timeline";
 
 /*
@@ -77,20 +76,17 @@ export default function Hero() {
         }}
       >
         <AsciiSignature />
-        <p className="mt-3 max-w-2xl font-display text-[clamp(2rem,4vw,3.5rem)] leading-[1.05] tracking-tight">
-          I&apos;m looking for a co-founder.
-        </p>
-        <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/80 sm:text-base">
-          I built Coinz to {COINZ_STATS.users} users and raised{" "}
-          {ENKRYPTIFY_FUNDING} for Enkryptify. I&apos;d love to meet someone to
-          start a new company with.
+        <p className="mt-3 max-w-4xl text-balance font-display text-[clamp(2rem,4vw,3.5rem)] leading-[1.05] tracking-tight">
+          I&apos;m looking for a{" "}
+          <span className="whitespace-nowrap">co-founder</span> in San
+          Francisco.
         </p>
         <a
           href="#contact"
-          className="focus-ring mt-2 border-b border-ink/30 pb-1 text-xs text-ink/80 transition-colors hover:text-accent"
+          className="focus-ring mt-4 border-b border-ink/30 pb-1 text-xs text-ink/80 transition-colors hover:text-accent"
         >
-          Meet me in San Francisco. I&apos;ll be there for three weeks in
-          January. <span aria-hidden="true">↗</span>
+          I&apos;m there from November 3 to December 3. Let&apos;s meet.{" "}
+          <span aria-hidden="true">↗</span>
         </a>
       </motion.header>
 
