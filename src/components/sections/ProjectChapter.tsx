@@ -33,9 +33,6 @@ function StoryBlock({ block }: { block: ChapterBlock }) {
             className="w-full rounded-xl"
           />
         </div>
-        <figcaption className="mt-3 text-center text-[13px] text-muted">
-          {block.caption}
-        </figcaption>
       </figure>
     );
   }
@@ -78,19 +75,8 @@ export default function ProjectChapter({
           {chapter.tagline}
         </p>
 
-        <ul className="mt-7 flex flex-wrap items-center justify-center gap-2">
-          {chapter.facts.map((fact) => (
-            <li
-              key={fact}
-              className="px-3 py-1 text-[13px] font-medium text-ink/80"
-            >
-              {fact}
-            </li>
-          ))}
-        </ul>
-
         {chapter.links && (
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
             {chapter.links.map((link) => (
               <a
                 key={link.href}

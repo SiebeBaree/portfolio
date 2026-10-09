@@ -13,10 +13,14 @@ Siebe's strengths are product and engineering. He would like to meet potential c
 
 ## Other products
 
-- [Notchlet](https://notchlet.com): an open source Mac app Siebe is building that tracks AI coding usage from the notch.
-- [Umber](https://umber.s4.nu): an open source image and video studio using your own API keys.
-- [anyfmt](https://anyfmt.xyz): an image converter that processes files in the browser, on your device.
-- [VoilaZaak](https://voilazaak.be): an experiment in using AI agents to build and sell websites for local businesses.
+- [Notchlet](https://siebebaree.com/work/notchlet): an open source Mac app Siebe is building that shows Claude Code, Codex, Cursor and OpenCode limits in the notch. Site: https://notchlet.com
+- [bMail](https://siebebaree.com/work/bmail): Siebe's open source Mac mail app for Gmail, Outlook and his own domains in one inbox. The b stands for Baree. Code: https://github.com/SiebeBaree/bMail
+- [PitchPoppy](https://siebebaree.com/work/pitchpoppy): enter your website and get a completely new one for free, as inspiration. Site: https://pitchpoppy.lol
+- [plan.baree.be](https://siebebaree.com/work/plan-baree-be): uploads Siebe's HTML plans to the cloud so he can read them on any laptop or his phone and build from anywhere.
+- [files.baree.be](https://siebebaree.com/work/files-baree-be): an open source file host that lets Siebe's coding agents share screenshots and recordings and attach them to GitHub pull requests.
+- [Imprint](https://siebebaree.com/work/imprint): a four hour build that generates Instagram campaigns for brands with physical products.
+- [Umber](https://siebebaree.com/work/umber): an open source desktop app for AI images and video using your own API keys. Site: https://umber.s4.nu
+- [anyfmt](https://siebebaree.com/work/anyfmt): an image converter that runs in the browser, so files never leave your device. Site: https://anyfmt.xyz
 
 ## Earlier work
 
