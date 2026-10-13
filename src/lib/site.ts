@@ -18,7 +18,7 @@ export const SITE_LINKS = {
   x: "https://x.com/BareeSiebe",
 } as const;
 
-export const CONTACT_EMAIL = "bareesiebe@gmail.com";
+export const CONTACT_EMAIL = "siebe@baree.be";
 
 export const SF_MEETUP_EMAIL_URL = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Meet in San Francisco in November")}`;
 
