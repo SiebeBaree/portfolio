@@ -222,7 +222,7 @@ export const post = {
         <h2>{"What's next"}</h2>
         <p>
           {
-            "Enkryptify is over, but I'm not done building. I'm looking for a co-founder to start my next venture with: someone exceptional, who really masters their craft and wants to move fast. You should be based in San Francisco or Belgium, or be willing to move to one of them."
+            "Enkryptify is over, but I'm not done building. I'm looking for a co-founder to start my next venture with: someone exceptional, who really masters their craft and wants to move fast. My next venture will be ambitious and intense from day one and I'm looking for a co-founder who wants exactly that. You should be based in San Francisco or Belgium, or be willing to move to one of them."
           }
         </p>
         <p>
