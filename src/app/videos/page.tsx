@@ -2,7 +2,13 @@ import type { Metadata } from "next";
 import SkyBackground from "@/components/backdrop/SkyBackground";
 import StoryLink from "@/components/ui/StoryLink";
 import VideoCard from "@/components/videos/VideoCard";
-import { SITE_NAME, VIDEO_EMAIL_URL } from "@/lib/site";
+import {
+  BASE_OPEN_GRAPH,
+  BASE_TWITTER,
+  DEFAULT_OG_IMAGE,
+  SITE_NAME,
+  VIDEO_EMAIL_URL,
+} from "@/lib/site";
 import {
   formatDuration,
   VIDEO_BASE,
@@ -19,13 +25,18 @@ export const metadata: Metadata = {
   description: DESCRIPTION,
   alternates: { canonical: "/videos" },
   openGraph: {
+    ...BASE_OPEN_GRAPH,
+    type: "website",
     title: `Motion videos · ${SITE_NAME}`,
     description: DESCRIPTION,
     url: "/videos",
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
+    ...BASE_TWITTER,
     title: `Motion videos · ${SITE_NAME}`,
     description: DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE.url],
   },
 };
 
