@@ -53,3 +53,5 @@ export const CONTACT_EMAIL = "siebe@baree.be";
 export const SF_MEETUP_EMAIL_URL = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Meet in San Francisco in November")}`;
 
 export const COFOUNDER_EMAIL_URL = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Let's talk about building a company together")}`;
+
+export const VIDEO_EMAIL_URL = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("A motion video for my product")}`;

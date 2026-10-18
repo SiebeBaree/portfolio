@@ -25,8 +25,11 @@ without colliding. Listed roughly in the order they paint.
 | Portrait cutout | `src/components/hero/Portrait.tsx` |
 | About me at dusk: hover-word scenes, birds, handwritten sign-off | `src/components/sections/About.tsx` |
 | Other apps at golden hour: pinned filmstrip of screenshots, earlier work and blog links | `src/components/sections/CurrentApps.tsx` |
+| Motion video offer, still at golden hour: the price and a link to /videos | `src/components/sections/Videos.tsx` |
 | Track record in afternoon light: Coinz and Enkryptify as full-screen scenes | `src/components/sections/TrackRecord.tsx` |
 | Night finale: the co-founder ask and the San Francisco trip, over a drawn skyline | `src/components/sections/Contact.tsx`, `src/components/contact/Skyline.tsx` |
+| Motion video page: /videos, past videos and the offer | `src/app/videos/page.tsx`, `src/components/videos/VideoCard.tsx` |
+| Video offer prices and the list of past videos | `src/lib/videos.ts` |
 | Cloud page transition and its navigate hook | `src/components/transition/CloudTransition.tsx` |
 | Project pages: /work/[slug], one complete story per project | `src/app/work/[slug]/page.tsx`, `src/components/sections/ProjectChapter.tsx` |
 | Shared blog author footer | `src/components/blog/AuthorFooter.tsx`, `author-footer.module.css` |
