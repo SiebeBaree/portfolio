@@ -6,7 +6,16 @@ import {
   Mrs_Saint_Delafield,
 } from "next/font/google";
 import CloudTransition from "@/components/transition/CloudTransition";
-import { SITE_DESCRIPTION, SITE_LINKS, SITE_NAME, SITE_URL } from "@/lib/site";
+import {
+  BASE_OPEN_GRAPH,
+  BASE_TWITTER,
+  DEFAULT_OG_IMAGE,
+  PERSON_ID,
+  SITE_DESCRIPTION,
+  SITE_LINKS,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -46,26 +55,18 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
+    ...BASE_OPEN_GRAPH,
     type: "website",
     url: SITE_URL,
-    siteName: SITE_NAME,
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
-    locale: "en_US",
-    images: [
-      {
-        url: "/og.png",
-        width: 1200,
-        height: 630,
-        alt: "Siebe Barée, founder and software engineer, in front of a blue sky with clouds",
-      },
-    ],
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
-    card: "summary_large_image",
+    ...BASE_TWITTER,
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
-    images: ["/og.png"],
+    images: [DEFAULT_OG_IMAGE.url],
   },
   robots: {
     index: true,
@@ -82,11 +83,12 @@ export const metadata: Metadata = {
 
 /*
  * Person schema for search engines and AI crawlers, mirrored by the plain
- * text version in public/llms.txt.
+ * text version served at /llms.txt. Blog posts point their author at PERSON_ID.
  */
 const PERSON_JSON_LD = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": PERSON_ID,
   name: SITE_NAME,
   url: SITE_URL,
   image: `${SITE_URL}/portrait.webp`,

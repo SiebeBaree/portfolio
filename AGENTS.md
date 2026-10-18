@@ -32,6 +32,8 @@ without colliding. Listed roughly in the order they paint.
 | Project pages: /work/[slug], one complete story per project | `src/app/work/[slug]/page.tsx`, `src/components/sections/ProjectChapter.tsx` |
 | Shared blog author footer | `src/components/blog/AuthorFooter.tsx`, `author-footer.module.css` |
 | Blog index, article pages and typography | `src/app/blog/` |
+| Blog share cards and RSS feed | `src/app/blog/[slug]/opengraph-image.tsx` (assets in `src/assets/og/`), `src/app/blog/feed.xml/route.ts` |
+| Plain text profile for AI crawlers | `src/app/llms.txt/route.ts` |
 | Hard-coded blog posts and registry | `src/content/blog/`, `src/lib/blog.ts` |
 | Chapter stories, one entry per project (images in `src/assets/work/` and `public/apps/`) | `src/lib/chapters.ts` |
 

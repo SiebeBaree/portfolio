@@ -12,12 +12,26 @@ export type BlogPost = {
   Content: ComponentType;
 };
 
-/** Register posts here. The index and sitemap follow automatically. */
+/**
+ * Register posts here. The index, sitemap, RSS feed, OG cards and llms.txt
+ * follow automatically.
+ */
 export const BLOG_POSTS: BlogPost[] = [
   gettingAJob,
   claudeAndBack,
   whyEnkryptifyFailed,
 ].sort((a, b) => b.date.localeCompare(a.date));
+
+export const BLOG_DESCRIPTION =
+  "Siebe Barée on building startups, coding with AI and working as a software engineer in Belgium.";
+
+/** Served by src/app/blog/feed.xml/route.ts and linked from every blog page. */
+export const BLOG_FEED_PATH = "/blog/feed.xml";
+
+/** Midnight UTC on the post date, the timestamp used in every feed and tag. */
+export function blogPostTime(post: BlogPost) {
+  return new Date(`${post.date}T00:00:00Z`);
+}
 
 export function getBlogPost(slug: string) {
   return BLOG_POSTS.find((post) => post.slug === slug);
