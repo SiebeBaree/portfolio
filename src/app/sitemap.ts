@@ -18,6 +18,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.7,
     },
+    {
+      url: `${SITE_URL}/videos`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
     ...BLOG_POSTS.map((post) => ({
       url: `${SITE_URL}/blog/${post.slug}`,
       lastModified: blogPostTime(post),

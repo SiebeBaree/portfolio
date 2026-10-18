@@ -8,6 +8,7 @@ import Contact from "@/components/sections/Contact";
 import CurrentApps from "@/components/sections/CurrentApps";
 import Hero from "@/components/sections/Hero";
 import TrackRecord from "@/components/sections/TrackRecord";
+import Videos from "@/components/sections/Videos";
 
 /*
  * Composition only. Each part below owns its own file, its own copy and its
@@ -31,6 +32,7 @@ export default function Page() {
         <Hero />
         <TrackRecord />
         <CurrentApps />
+        <Videos />
         <About />
         <Contact />
       </main>

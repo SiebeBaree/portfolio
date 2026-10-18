@@ -16,7 +16,7 @@ import { EASE_OUT_QUINT, SCROLL_UNLOCK_AT } from "@/lib/timeline";
 
 /*
  * The macOS dock, kept: a Liquid Glass shelf pinned to the bottom of the
- * viewport holding contact links and the blog. Icons swell as the cursor
+ * viewport holding contact links, the blog and the videos page. Icons swell as the cursor
  * nears, neighbours rising with them on a cosine-ish falloff, and each one
  * names itself in a small bubble above, the way the real dock does.
  *
@@ -64,6 +64,34 @@ const LINKS: DockLink[] = [
         >
           <rect x="5" y="3" width="14" height="18" rx="2" />
           <path d="M9 8h6M9 12h6M9 16h4" />
+        </svg>
+      </span>
+    ),
+  },
+
+  {
+    label: "Videos",
+    href: "/videos",
+    external: false,
+    tile: (
+      <span
+        className="dock-tile"
+        style={{
+          background: "linear-gradient(180deg, #a98bfa 0%, #6d43e6 100%)",
+        }}
+      >
+        <svg
+          aria-hidden
+          viewBox="0 0 24 24"
+          style={{ width: "56%" }}
+          fill="none"
+          stroke="#ffffff"
+          strokeWidth="1.7"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <rect x="3" y="5" width="18" height="14" rx="2.4" />
+          <path d="M10 9.2v5.6l4.6-2.8z" fill="#ffffff" />
         </svg>
       </span>
     ),
@@ -238,7 +266,7 @@ export default function Dock() {
       }}
     >
       <nav
-        aria-label="Contact and blog links"
+        aria-label="Site and contact links"
         className="dock-glass pointer-events-auto flex h-14 items-end gap-2 rounded-[17px] px-1.5 pb-1.5"
         onMouseMove={(e) => cursorX.set(e.clientX)}
         onMouseLeave={() => cursorX.set(Infinity)}

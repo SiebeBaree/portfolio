@@ -31,6 +31,10 @@ Siebe's strengths are product and engineering. He would like to meet potential c
 - [Umber](${SITE_URL}/work/umber): an open source desktop app for AI images and video using your own API keys. Site: https://umber.s4.nu
 - [anyfmt](${SITE_URL}/work/anyfmt): an image converter that runs in the browser, so files never leave your device. Site: https://anyfmt.xyz
 
+## Motion videos
+
+- [Motion videos](${SITE_URL}/videos): Siebe makes short motion videos that show what a SaaS product does. €299 or $335 ex VAT buys a 30 minute call and one video of up to 45 seconds. Every extra 15 seconds is €50 or $55, up to 1:30.
+
 ## Earlier work
 
 - [EEVEE Mobility](${SITE_URL}/work/eevee-mobility): engineering work on an electric fleet management platform, started in 2024.
