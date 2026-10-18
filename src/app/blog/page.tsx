@@ -1,22 +1,40 @@
 import type { Metadata } from "next";
 import SkyBackground from "@/components/backdrop/SkyBackground";
 import StoryLink from "@/components/ui/StoryLink";
-import { BLOG_POSTS, formatBlogDate } from "@/lib/blog";
-import { SITE_NAME } from "@/lib/site";
+import {
+  BLOG_DESCRIPTION,
+  BLOG_FEED_PATH,
+  BLOG_POSTS,
+  formatBlogDate,
+} from "@/lib/blog";
+import {
+  BASE_OPEN_GRAPH,
+  BASE_TWITTER,
+  DEFAULT_OG_IMAGE,
+  SITE_NAME,
+} from "@/lib/site";
 import styles from "./blog.module.css";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "Writing by Siebe Barée.",
-  alternates: { canonical: "/blog" },
+  description: BLOG_DESCRIPTION,
+  alternates: {
+    canonical: "/blog",
+    types: { "application/rss+xml": BLOG_FEED_PATH },
+  },
   openGraph: {
+    ...BASE_OPEN_GRAPH,
+    type: "website",
     title: `Blog · ${SITE_NAME}`,
-    description: "Writing by Siebe Barée.",
+    description: BLOG_DESCRIPTION,
     url: "/blog",
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
+    ...BASE_TWITTER,
     title: `Blog · ${SITE_NAME}`,
-    description: "Writing by Siebe Barée.",
+    description: BLOG_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE.url],
   },
 };
 

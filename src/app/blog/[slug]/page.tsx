@@ -3,8 +3,21 @@ import { notFound } from "next/navigation";
 import SkyBackground from "@/components/backdrop/SkyBackground";
 import AuthorFooter from "@/components/blog/AuthorFooter";
 import StoryLink from "@/components/ui/StoryLink";
-import { BLOG_POSTS, formatBlogDate, getBlogPost } from "@/lib/blog";
-import { SITE_NAME } from "@/lib/site";
+import {
+  BLOG_FEED_PATH,
+  BLOG_POSTS,
+  type BlogPost,
+  blogPostTime,
+  formatBlogDate,
+  getBlogPost,
+} from "@/lib/blog";
+import {
+  BASE_OPEN_GRAPH,
+  BASE_TWITTER,
+  PERSON_ID,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/site";
 import styles from "../blog.module.css";
 
 export const dynamicParams = false;
@@ -21,24 +34,51 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = getBlogPost(slug);
   if (!post) notFound();
+  // og:image and twitter:image come from ./opengraph-image.tsx
   return {
     title: post.title,
     description: post.description,
-    alternates: { canonical: `/blog/${slug}` },
+    alternates: {
+      canonical: `/blog/${slug}`,
+      types: { "application/rss+xml": BLOG_FEED_PATH },
+    },
     openGraph: {
+      ...BASE_OPEN_GRAPH,
       type: "article",
       title: `${post.title} · ${SITE_NAME}`,
       description: post.description,
       url: `/blog/${slug}`,
-      publishedTime: post.date,
-      authors: [SITE_NAME],
-      images: [{ url: "/og.png", width: 1200, height: 630 }],
+      publishedTime: blogPostTime(post).toISOString(),
+      authors: [SITE_URL],
     },
     twitter: {
-      card: "summary_large_image",
+      ...BASE_TWITTER,
       title: `${post.title} · ${SITE_NAME}`,
       description: post.description,
-      images: ["/og.png"],
+    },
+  };
+}
+
+/** BlogPosting schema so search engines read the post as an article by Siebe. */
+function articleJsonLd(post: BlogPost) {
+  const url = `${SITE_URL}/blog/${post.slug}`;
+  const published = blogPostTime(post).toISOString();
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    url,
+    mainEntityOfPage: url,
+    image: `${url}/opengraph-image`,
+    datePublished: published,
+    dateModified: published,
+    inLanguage: "en",
+    author: {
+      "@type": "Person",
+      "@id": PERSON_ID,
+      name: SITE_NAME,
+      url: SITE_URL,
     },
   };
 }
@@ -65,6 +105,13 @@ export default async function BlogPostPage({
           </StoryLink>
         </nav>
         <article>
+          <script
+            type="application/ld+json"
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD built from the post registry
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(articleJsonLd(post)),
+            }}
+          />
           <header className={styles.articleHeader}>
             <h1>{post.title}</h1>
             <p className={styles.date}>
