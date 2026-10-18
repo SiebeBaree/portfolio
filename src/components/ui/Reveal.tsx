@@ -13,10 +13,13 @@ export default function Reveal({
   children,
   delay = 0,
   className,
+  margin = "0px 0px -12% 0px",
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
+  /** how far into the viewport the content must be before it rises */
+  margin?: `${string}px ${string}px ${string}% ${string}px`;
 }) {
   const reducedMotion = useReducedMotion();
   return (
@@ -26,7 +29,7 @@ export default function Reveal({
         reducedMotion ? false : { opacity: 0, y: 26, filter: "blur(10px)" }
       }
       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      viewport={{ once: true, margin: "0px 0px -12% 0px" }}
+      viewport={{ once: true, margin }}
       transition={{
         duration: reducedMotion ? 0 : 0.7,
         ease: EASE_OUT_QUINT,

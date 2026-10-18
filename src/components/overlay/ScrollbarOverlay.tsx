@@ -117,9 +117,11 @@ export default function ScrollbarOverlay() {
       aria-hidden
       className="fixed top-2 right-1 bottom-2 z-50 w-3 opacity-0 transition-opacity duration-300"
     >
+      {/* blue-black by day, cream once the homepage sky turns dark
+          (`--hour-dark` comes from backdrop/SkyBackground) */}
       <div
         ref={thumbRef}
-        className="w-1.5 cursor-grab rounded-full bg-[rgb(28_41_90/0.3)] transition-[background-color,width] duration-200 hover:w-2.5 hover:bg-[rgb(28_41_90/0.45)] active:cursor-grabbing"
+        className="w-1.5 cursor-grab rounded-full bg-[color-mix(in_oklab,rgb(251_241_230/0.4)_calc(var(--hour-dark,0)*100%),rgb(28_41_90/0.3))] transition-[background-color,width] duration-200 hover:w-2.5 hover:bg-[color-mix(in_oklab,rgb(251_241_230/0.6)_calc(var(--hour-dark,0)*100%),rgb(28_41_90/0.45))] active:cursor-grabbing"
         style={{ touchAction: "none" }}
       />
     </div>

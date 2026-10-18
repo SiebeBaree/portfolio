@@ -562,7 +562,7 @@ function Peek({
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <span className="cursor-default underline decoration-ink/25 decoration-dotted decoration-2 underline-offset-4 transition-colors duration-300 hover:decoration-[#c97e2a]/60">
+      <span className="cursor-default underline decoration-(--hour-ink)/45 decoration-dotted decoration-2 underline-offset-4 transition-colors duration-300 hover:decoration-[#ffb867]">
         {children}
       </span>
       <AnimatePresence>
@@ -641,12 +641,19 @@ function Bird({
       <path
         d="M2 9 C5.5 3.5 9.5 3.5 12 7.5 C14.5 3.5 18.5 3.5 22 9"
         stroke="currentColor"
-        strokeWidth="1.8"
+        strokeWidth="2"
         strokeLinecap="round"
       />
     </svg>
   );
 }
+
+/*
+ * The copy is cream against the dusk, but the bottom of the screen still
+ * holds the sunset's glow, so everything here rises a little later than
+ * elsewhere: only once it has cleared the ember into the violet.
+ */
+const DUSK_REVEAL = "0px 0px -32% 0px";
 
 export default function About() {
   const reducedMotion = useReducedMotion();
@@ -669,50 +676,56 @@ export default function About() {
     <section
       ref={sectionRef}
       id="about"
-      className="mx-auto flex w-full max-w-3xl flex-col items-center justify-center px-6 py-24 text-center sm:px-10"
+      data-hour="dusk"
+      aria-labelledby="about-title"
+      className="mx-auto flex min-h-[100svh] w-full max-w-3xl flex-col items-center justify-center px-6 py-24 text-center sm:px-10"
+      style={{ color: "var(--hour-ink)" }}
     >
       <div className="relative">
-        {/* the flock, scattered through the whitespace around the copy */}
+        {/* the flock, silhouetted against the sunset around the copy */}
         <Bird
-          className="absolute -top-14 left-[6%] text-ink/45"
-          size={26}
+          className="absolute -top-16 left-[4%] text-[#140c24]/80"
+          size={30}
           drift={10}
           duration={9}
           still={still}
         />
         <Bird
-          className="absolute -top-7 left-[16%] text-ink/30"
-          size={16}
+          className="absolute -top-8 left-[15%] text-[#140c24]/60"
+          size={18}
           drift={7}
           duration={7}
           delay={1.3}
           still={still}
         />
         <Bird
-          className="absolute -top-20 right-[12%] text-ink/40"
-          size={20}
+          className="absolute -top-24 right-[10%] text-[#140c24]/70"
+          size={23}
           drift={-9}
           duration={11}
           delay={0.6}
           still={still}
         />
         <Bird
-          className="absolute -bottom-16 right-[7%] text-ink/35"
-          size={22}
+          className="absolute -bottom-20 right-[5%] text-[#140c24]/65"
+          size={25}
           drift={-8}
           duration={8.5}
           delay={2.1}
           still={still}
         />
 
-        <Reveal>
-          <h2 className="mt-3 font-display text-4xl tracking-tight text-ink sm:text-6xl">
+        <Reveal margin={DUSK_REVEAL}>
+          <h2
+            id="about-title"
+            className="font-display text-5xl tracking-[-0.03em] sm:text-7xl"
+          >
             A little about me.
           </h2>
         </Reveal>
 
-        <Reveal delay={0.1}>
-          <div className="mx-auto mt-10 max-w-xl space-y-5 text-base leading-relaxed text-ink/80 sm:text-lg">
+        <Reveal delay={0.1} margin={DUSK_REVEAL}>
+          <div className="mx-auto mt-10 max-w-xl space-y-5 text-base leading-relaxed text-(--hour-ink)/85 sm:text-lg">
             <p>
               I&apos;m Siebe. I live in{" "}
               <Peek kind="belgium">
@@ -740,18 +753,14 @@ export default function About() {
 
         {/* the sign-off writes itself in when it enters the viewport */}
         <motion.p
-          className="mt-12 -rotate-3 font-script text-5xl text-ink/90 sm:text-6xl"
+          className="mt-12 -rotate-3 font-script text-5xl sm:text-6xl"
           initial={
-            still
-              ? undefined
+            reducedMotion
+              ? false
               : { clipPath: "inset(-25% 100% -25% -5%)", opacity: 0.4 }
           }
-          whileInView={
-            still
-              ? undefined
-              : { clipPath: "inset(-25% -8% -25% -5%)", opacity: 1 }
-          }
-          viewport={{ once: true, margin: "0px 0px -18% 0px" }}
+          whileInView={{ clipPath: "inset(-25% -8% -25% -5%)", opacity: 1 }}
+          viewport={{ once: true, margin: DUSK_REVEAL }}
           transition={{ duration: 1.6, ease: "easeInOut", delay: 0.2 }}
         >
           Siebe Barée

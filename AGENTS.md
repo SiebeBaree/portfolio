@@ -1,6 +1,6 @@
 <!-- BEGIN:nextjs-agent-rules -->
 
-# This is NOT the Next.js you know
+## This is NOT the Next.js you know
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
 
@@ -15,19 +15,18 @@ without colliding. Listed roughly in the order they paint.
 
 | Part | Files |
 | --- | --- |
-| Sky backdrop: gradient, drifting white blobs, film grain | `src/components/backdrop/SkyBackground.tsx` |
+| Sky backdrop: gradient, drifting white blobs, film grain, and on the homepage the hours from afternoon to night with the sun and stars | `src/components/backdrop/SkyBackground.tsx` |
 | Cloud intro and scroll-out | `src/components/backdrop/CloudLayer.tsx` |
 | Scroll cue in the bottom-left corner of the first screen | `src/components/overlay/ScrollCue.tsx`, `scroll-cue.css` |
 | Liquid Glass dock of contact links, pinned bottom centre | `src/components/overlay/Dock.tsx`, `dock.css` |
 | Overlay scrollbar | `src/components/overlay/ScrollbarOverlay.tsx` |
 | Hero: co-founder search, name and portrait choreography | `src/components/sections/Hero.tsx` |
-| Co-founder fit: business ownership and commitment | `src/components/sections/CoFounder.tsx` |
 | ASCII signature logo | `src/components/hero/AsciiSignature.tsx` |
 | Portrait cutout | `src/components/hero/Portrait.tsx` |
-| About me: hover-word scenes, birds, handwritten sign-off | `src/components/sections/About.tsx` |
-| Other apps and optional earlier stories: compact links | `src/components/sections/CurrentApps.tsx` |
-| Track record: Enkryptify and Coinz as supporting evidence | `src/components/sections/TrackRecord.tsx`, `track-record.module.css` |
-| Invitation to meet potential co-founders in San Francisco | `src/components/sections/Contact.tsx` |
+| About me at dusk: hover-word scenes, birds, handwritten sign-off | `src/components/sections/About.tsx` |
+| Other apps at golden hour: pinned filmstrip of screenshots, earlier work and blog links | `src/components/sections/CurrentApps.tsx` |
+| Track record in afternoon light: Coinz and Enkryptify as full-screen scenes | `src/components/sections/TrackRecord.tsx` |
+| Night finale: the co-founder ask and the San Francisco trip, over a drawn skyline | `src/components/sections/Contact.tsx`, `src/components/contact/Skyline.tsx` |
 | Cloud page transition and its navigate hook | `src/components/transition/CloudTransition.tsx` |
 | Project pages: /work/[slug], one complete story per project | `src/app/work/[slug]/page.tsx`, `src/components/sections/ProjectChapter.tsx` |
 | Shared blog author footer | `src/components/blog/AuthorFooter.tsx`, `author-footer.module.css` |
@@ -42,7 +41,7 @@ without colliding. Listed roughly in the order they paint.
 These are the only things more than one part depends on. Prefer solving a
 problem inside your own file first.
 
-- `src/app/globals.css`: colour tokens, glass utilities, focus ring, reduced motion
+- `src/app/globals.css`: colour tokens, glass utilities, focus ring, reduced motion, and `--hour-ink` (ink by day, cream after dusk) for text that lives through a change of hour
 - `src/lib/timeline.ts`: the load-in timing contract shared by the hero, the clouds and the scroll cue
 - `src/lib/ambient-ticker.ts`: the one ~20Hz heartbeat for slow ambient drift (sky blobs, cloud bob, the About birds). Never give ambient motion its own CSS animation, rAF loop or timer: anything running at display refresh rate keeps every backdrop-filter re-blurring and the compositor awake, which is exactly the CPU burn this ticker exists to prevent. Gate offscreen ambience (unsubscribe when the owner is out of view)
 - `src/lib/projects.ts`: the public story list and confirmed headline figures, read by the homepage and /work pages
@@ -50,6 +49,7 @@ problem inside your own file first.
 - `src/components/ui/StoryLink.tsx`: native links with the shared cloud navigation treatment
 - `src/components/ui/Reveal.tsx`: the single scroll-reveal treatment
 - `src/components/ui/Eyebrow.tsx`: the small uppercase section label
+- `data-hour` on homepage sections (`afternoon`, `golden`, `dusk`, `night`): SkyBackground measures these to fade each hour in as its section arrives, and writes `--hour-dark` onto html. Moving or adding a section below the hero changes the time of day around it
 - `src/app/page.tsx`: composition order and nothing else
 
 ## House rules
