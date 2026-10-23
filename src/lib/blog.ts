@@ -1,4 +1,5 @@
 import type { ComponentType } from "react";
+import { post as aiDestroyedMyFocus } from "@/content/blog/ai-destroyed-my-focus";
 import { post as gettingAJob } from "@/content/blog/getting-a-software-engineering-job-in-belgium";
 import { post as claudeAndBack } from "@/content/blog/moving-from-claude-to-chatgpt-and-back";
 import { post as whyEnkryptifyFailed } from "@/content/blog/why-enkryptify-failed";
@@ -17,6 +18,7 @@ export type BlogPost = {
  * follow automatically.
  */
 export const BLOG_POSTS: BlogPost[] = [
+  aiDestroyedMyFocus,
   gettingAJob,
   claudeAndBack,
   whyEnkryptifyFailed,
