@@ -23,6 +23,46 @@ export type Video = {
 
 export const VIDEOS: Video[] = [
   {
+    title: "Grass Clipper 3",
+    description:
+      "A deadpan tour of a million blades of grass, robot mowers and one UFO, filmed inside the game itself.",
+    src: "https://files.baree.be/forever/grass-clipper-3-8aedc2.mp4",
+    poster: "/videos/grass-clipper-3.webp",
+    seconds: 62,
+    width: 1920,
+    height: 1080,
+  },
+  {
+    title: "bMail launch",
+    description:
+      "An ordinary email folds itself into the bMail paper plane, then the app takes over on Mac and iPhone.",
+    src: "https://files.baree.be/forever/bmail-launch-aab12f.mp4",
+    poster: "/videos/bmail-launch.webp",
+    seconds: 70,
+    width: 1920,
+    height: 1080,
+  },
+  {
+    title: "bMail teaser",
+    description:
+      "The bMail logo drawn line by line in white ink, ending on the launch date.",
+    src: "https://files.baree.be/forever/bmail-teaser-e72fc8.mp4",
+    poster: "/videos/bmail-teaser.webp",
+    seconds: 19,
+    width: 1920,
+    height: 1080,
+  },
+  {
+    title: "anyfmt launch",
+    description:
+      "An image converter that runs on your device, with every line acting out its own verb.",
+    src: "https://files.baree.be/forever/anyfmt-launch-8514c5.mp4",
+    poster: "/videos/anyfmt-launch.webp",
+    seconds: 31,
+    width: 1920,
+    height: 1080,
+  },
+  {
     title: "Umber",
     description:
       "A short history of capturing motion, from painted racehorses to AI video in Umber.",
