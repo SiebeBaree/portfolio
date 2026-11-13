@@ -6,6 +6,7 @@ import {
   Mrs_Saint_Delafield,
 } from "next/font/google";
 import CloudTransition from "@/components/transition/CloudTransition";
+import { LITE_SCRIPT } from "@/lib/lite";
 import {
   BASE_OPEN_GRAPH,
   BASE_TWITTER,
@@ -108,9 +109,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      // the lite script below may add data-lite before hydration
+      suppressHydrationWarning
       className={`${inter.variable} ${instrumentSerif.variable} ${mrsSaintDelafield.variable} ${caveat.variable} antialiased`}
     >
       <body className="font-body">
+        {/* runs before first paint, so lite styles never flash (lib/lite.ts) */}
+        <script
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: static inline script from a constant
+          dangerouslySetInnerHTML={{ __html: LITE_SCRIPT }}
+        />
         <script
           type="application/ld+json"
           // biome-ignore lint/security/noDangerouslySetInnerHtml: static JSON-LD built from constants

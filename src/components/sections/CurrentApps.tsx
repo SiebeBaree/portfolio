@@ -86,8 +86,15 @@ const APPS: { slug: AppSlug; summary: string; shot: StaticImageData }[] = [
 /** vertical scroll spent per pixel of horizontal travel */
 const SCROLL_PER_PX = 0.8;
 
+/*
+ * A box-shadow rather than filter: drop-shadow() (whose blur reads at half
+ * the value, hence the doubled radii): drop-shadow filters on a strip that
+ * slides with every scroll step are recomputed each frame, slowly in Firefox.
+ * Even a box-shadow is redrawn as the strip moves, so slow renderers
+ * (lib/lite.ts) get a single tighter one.
+ */
 const SHADOW =
-  "drop-shadow(-10px 14px 14px rgb(120 56 22 / 0.22)) drop-shadow(-44px 52px 54px rgb(120 56 22 / 0.24))";
+  "-10px 14px 28px rgb(120 56 22 / 0.22), -44px 52px 108px rgb(120 56 22 / 0.24)";
 
 function EarlierWork() {
   const earlier = projectsIn("earlier");
@@ -188,10 +195,10 @@ export default function CurrentApps() {
                   className="focus-ring group block shrink-0"
                 >
                   <div
-                    className="relative h-[var(--tile-h)] transition-transform duration-300 ease-out group-hover:-translate-y-1.5"
+                    className="relative h-[var(--tile-h)] rounded-[14px] lite:shadow-[-24px_30px_56px_rgb(120_56_22/0.3)]! transition-transform duration-300 ease-out group-hover:-translate-y-1.5"
                     style={{
                       aspectRatio: `${app.shot.width} / ${app.shot.height}`,
-                      filter: SHADOW,
+                      boxShadow: SHADOW,
                     }}
                   >
                     <Image
@@ -201,7 +208,7 @@ export default function CurrentApps() {
                       className="h-full w-full rounded-[14px] object-cover"
                     />
                     {/* low sun from the right: a warm wash, strongest on the lit edge */}
-                    <div className="pointer-events-none absolute inset-0 rounded-[14px] bg-[linear-gradient(255deg,rgb(255_196_128/0.34)_0%,rgb(255_190_120/0.1)_38%,rgb(255_190_120/0)_62%)] mix-blend-soft-light" />
+                    <div className="pointer-events-none absolute inset-0 rounded-[14px] bg-[linear-gradient(255deg,rgb(255_196_128/0.34)_0%,rgb(255_190_120/0.1)_38%,rgb(255_190_120/0)_62%)] mix-blend-soft-light lite:mix-blend-normal lite:opacity-45" />
                     <div className="pointer-events-none absolute inset-0 rounded-[14px] shadow-[inset_-1px_1px_0_rgb(255_226_190/0.55)]" />
                   </div>
                   <div className="mt-6 flex max-w-[22rem] gap-3.5">

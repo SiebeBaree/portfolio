@@ -112,10 +112,14 @@ export default function Hero() {
         }
       >
         <motion.h1
-          className="flex items-center justify-center font-display leading-none tracking-tight text-ink max-md:gap-x-[0.24em]"
+          className="flex items-center justify-center font-display leading-none tracking-tight text-ink max-md:gap-x-[0.24em] lite:filter-none!"
           style={{ fontSize: "clamp(2.8rem, 9.5vw, 8.5rem)" }}
           initial={reducedMotion ? false : { opacity: 0, filter: "blur(10px)" }}
-          animate={{ opacity: 1, filter: "blur(0px)" }}
+          animate={{
+            opacity: 1,
+            filter: "blur(0px)",
+            transitionEnd: { filter: "none" },
+          }}
           transition={{
             duration: reducedMotion ? 0 : INTRO.nameDuration,
             ease: EASE_OUT_QUINT,

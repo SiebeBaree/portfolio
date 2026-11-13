@@ -9,8 +9,9 @@ import {
   useScroll,
   useTransform,
 } from "motion/react";
-import { type RefObject, useEffect, useRef } from "react";
+import { type CSSProperties, type RefObject, useEffect, useRef } from "react";
 import { onAmbientTick } from "@/lib/ambient-ticker";
+import { isLite } from "@/lib/lite";
 
 /*
  * The atmosphere behind everything, ported from the desktop app's canvas
@@ -31,7 +32,9 @@ import { onAmbientTick } from "@/lib/ambient-ticker";
  * forces every backdrop-filter surface on the page (all the glass) to
  * re-blur at the display's full refresh rate, forever. Over 26-41s loops
  * one 50ms step moves a blob a fraction of a pixel, so the motion reads the
- * same while the glass re-blurs a fifth as often.
+ * same while the glass re-blurs a fifth as often. On slow renderers
+ * (lib/lite.ts) the blobs hold still: even stepped, their drift repaints
+ * the whole screen 20 times a second.
  */
 
 export type Hour = "afternoon" | "golden" | "dusk" | "night";
@@ -67,7 +70,9 @@ const NIGHT_CANVAS = "#03050f";
 
 // Same technique as the desktop app: an inline SVG turbulence filter whose
 // alpha carries the noise over a flat blue-grey, so the grain never tints
-// the canvas. Element opacity is the single strength knob.
+// the canvas. Element opacity is the single strength knob. Slow renderers
+// get public/grain.webp instead, the same tile rendered once to pixels:
+// Firefox runs SVG filters on the CPU.
 const GRAIN =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.35 0 0 0 0 0.38 0 0 0 0 0.48 0 0 0 0.75 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E\")";
 
@@ -112,28 +117,96 @@ const TRACKS: Record<"a" | "b" | "c", Track> = {
   },
 };
 
-const BLOBS: { track: keyof typeof TRACKS; className: string }[] = [
+/*
+ * Each blob is a white disc of `size` rem seen through a gaussian blur of
+ * `blur` px. The blur is drawn as a radial gradient with the blurred disc's
+ * falloff rather than a `filter: blur()`: a blur filter on a moving, scaling
+ * element is recomputed every step, which Firefox does slowly, while a
+ * gradient costs next to nothing and looks the same.
+ */
+const BLOBS: {
+  track: keyof typeof TRACKS;
+  className: string;
+  size: number;
+  alpha: number;
+  blur: number;
+}[] = [
   {
     track: "a",
-    className: "-top-[14%] -left-[6%] size-[38rem] bg-white/95 blur-[80px]",
+    className: "-top-[14%] -left-[6%]",
+    size: 38,
+    alpha: 0.95,
+    blur: 80,
   },
   {
     track: "b",
-    className: "top-[2%] -right-[10%] size-[42rem] bg-white/85 blur-[90px]",
+    className: "top-[2%] -right-[10%]",
+    size: 42,
+    alpha: 0.85,
+    blur: 90,
   },
   {
     track: "c",
-    className: "top-[34%] left-[34%] size-[32rem] bg-white/70 blur-[75px]",
+    className: "top-[34%] left-[34%]",
+    size: 32,
+    alpha: 0.7,
+    blur: 75,
   },
   {
     track: "b",
-    className: "-bottom-[18%] -left-[8%] size-[34rem] bg-white/80 blur-[80px]",
+    className: "-bottom-[18%] -left-[8%]",
+    size: 34,
+    alpha: 0.8,
+    blur: 80,
   },
   {
     track: "a",
-    className: "-right-[6%] -bottom-[12%] size-[30rem] bg-white/80 blur-[75px]",
+    className: "-right-[6%] -bottom-[12%]",
+    size: 30,
+    alpha: 0.8,
+    blur: 75,
   },
 ];
+
+/*
+ * The edge of a gaussian-blurred disc: coverage at distance u standard
+ * deviations outside the original edge, 0.5 * erfc(u / sqrt 2).
+ */
+const EDGE: [number, number][] = [
+  [-2, 0.977],
+  [-1.5, 0.933],
+  [-1, 0.841],
+  [-0.5, 0.691],
+  [0, 0.5],
+  [0.5, 0.309],
+  [1, 0.159],
+  [1.5, 0.067],
+  [2, 0.023],
+  [3, 0],
+];
+
+/** the blurred disc as a plain box: same centre, grown by the blur's reach */
+function blobStyle({
+  size,
+  alpha,
+  blur,
+}: (typeof BLOBS)[number]): CSSProperties {
+  const r = size * 8; // radius in px at the 16px rem the classes assumed
+  const reach = 3 * blur;
+  const outer = r + reach;
+  // a disc's curvature pulls its blurred half-light point slightly inward
+  const edge = r - (blur * blur) / (2 * r);
+  const stops = EDGE.map(
+    ([u, k]) =>
+      `rgb(255 255 255 / ${(alpha * k).toFixed(3)}) ${(((edge + u * blur) / outer) * 100).toFixed(2)}%`,
+  );
+  return {
+    width: outer * 2,
+    height: outer * 2,
+    margin: -reach,
+    background: `radial-gradient(closest-side, rgb(255 255 255 / ${alpha}) 0%, ${stops.join(", ")})`,
+  };
+}
 
 // indistinguishable from CSS ease-in-out on a blob this blurred and slow
 const easeInOut = (t: number) => 0.5 - 0.5 * Math.cos(Math.PI * t);
@@ -189,15 +262,43 @@ function fade(y: number, [a, b]: [number, number]) {
   return t * t * (3 - 2 * t);
 }
 
+/*
+ * On slow renderers (lib/lite.ts) the light changes in small steps instead
+ * of on every scroll frame. Each change repaints the whole sky, which costs
+ * whole frames when Firefox draws on the CPU; stepped, most scroll frames
+ * leave the sky untouched, and steps this fine on light this soft read as a
+ * continuous fade.
+ */
+const LITE_STEPS = 24;
+const LITE_SUN_STEP_VH = 2;
+
 function useHourOpacity(
   scrollY: MotionValue<number>,
   measured: MotionValue<number>,
   ranges: RefObject<Ranges>,
+  lite: RefObject<boolean>,
   hour: Hour,
 ) {
   // `measured` only exists to re-run the transform after a re-measure
-  return useTransform([scrollY, measured], ([y]: number[]) =>
-    Number.isFinite(y) ? fade(y, ranges.current[hour]) : 0,
+  return useTransform([scrollY, measured], ([y]: number[]) => {
+    if (!Number.isFinite(y)) return 0;
+    const v = fade(y, ranges.current[hour]);
+    return lite.current ? Math.round(v * LITE_STEPS) / LITE_STEPS : v;
+  });
+}
+
+/** visible only while showing and not buried under a fully opaque hour */
+function useShown(
+  opacity: MotionValue<number> | null,
+  cover: MotionValue<number>,
+  depth: number,
+) {
+  return useTransform(
+    opacity ? [opacity, cover] : [cover],
+    (values: number[]) => {
+      const [o, c] = opacity ? values : [1, values[0]];
+      return o > 0 && c <= depth ? "visible" : "hidden";
+    },
   );
 }
 
@@ -207,10 +308,13 @@ export default function SkyBackground() {
   const { scrollY } = useScroll();
   const ranges = useRef<Ranges>(INITIAL);
   const measured = useMotionValue(0);
+  // read in an effect, so the server render and hydration always match
+  const lite = useRef(false);
 
   // Where each hour begins: as its section's top rises from the bottom of
   // the viewport to near the top, that hour fades in over the last one.
   useEffect(() => {
+    lite.current = isLite();
     const measure = () => {
       const vh = window.innerHeight;
       const next = { ...INITIAL };
@@ -233,24 +337,57 @@ export default function SkyBackground() {
     return () => ro.disconnect();
   }, [measured]);
 
-  const afternoon = useHourOpacity(scrollY, measured, ranges, "afternoon");
-  const golden = useHourOpacity(scrollY, measured, ranges, "golden");
-  const dusk = useHourOpacity(scrollY, measured, ranges, "dusk");
-  const night = useHourOpacity(scrollY, measured, ranges, "night");
+  const afternoon = useHourOpacity(
+    scrollY,
+    measured,
+    ranges,
+    lite,
+    "afternoon",
+  );
+  const golden = useHourOpacity(scrollY, measured, ranges, lite, "golden");
+  const dusk = useHourOpacity(scrollY, measured, ranges, lite, "dusk");
+  const night = useHourOpacity(scrollY, measured, ranges, lite, "night");
+
+  /*
+   * Every hour's sky is opaque, so once one has fully faded in, everything
+   * beneath it is invisible. Those layers are hidden outright rather than
+   * left for the renderer to paint over: four full-screen gradients stacked
+   * up was most of the cost of scrolling on a slow machine. `cover` is how
+   * many layers deep the topmost opaque hour sits.
+   */
+  const cover = useTransform(
+    [afternoon, golden, dusk, night],
+    ([a, g, d, n]: number[]): number =>
+      n >= 1 ? 4 : d >= 1 ? 3 : g >= 1 ? 2 : a >= 1 ? 1 : 0,
+  );
+  const dayShown = useShown(null, cover, 0);
+  const afternoonShown = useShown(afternoon, cover, 1);
+  const goldenShown = useShown(golden, cover, 2);
+  const duskShown = useShown(dusk, cover, 3);
+  const nightShown = useShown(night, cover, 4);
 
   /*
    * Text that lives through a change of hour (the app strip, the scrollbar)
    * reads `--hour-dark` to fade from ink to cream. Written only while the
    * light is changing, and cleared when the page leaves.
    */
+  // Every write restyles the whole document (all of it inherits the
+  // property), so it is rounded and only written when it actually moves.
+  const hourDark = useRef("");
   useMotionValueEvent(dusk, "change", (v) => {
-    document.documentElement.style.setProperty("--hour-dark", v.toFixed(3));
+    const next = v.toFixed(2);
+    if (next === hourDark.current) return;
+    hourDark.current = next;
+    document.documentElement.style.setProperty("--hour-dark", next);
   });
   // at night the canvas turns dark too, so rubber-band overscroll past the
   // skyline shows night instead of the daytime canvas colour
+  const canvas = useRef("");
   useMotionValueEvent(night, "change", (v) => {
-    document.documentElement.style.backgroundColor =
-      v > 0.5 ? NIGHT_CANVAS : "";
+    const next = v > 0.5 ? NIGHT_CANVAS : "";
+    if (next === canvas.current) return;
+    canvas.current = next;
+    document.documentElement.style.backgroundColor = next;
   });
   useEffect(() => {
     const html = document.documentElement;
@@ -287,14 +424,16 @@ export default function SkyBackground() {
     if (!Number.isFinite(y) || r.golden === NEVER) return "-40vh";
     const along = (from: number, to: number) =>
       Math.min(1, Math.max(0, (y - from) / (to - from)));
-    if (y < r.golden[0]) {
-      return `${-40 + 32 * along(r.afternoon[0], r.golden[0])}vh`;
-    }
-    return `${-8 + 70 * along(r.golden[0], r.night[1])}vh`;
+    const vh =
+      y < r.golden[0]
+        ? -40 + 32 * along(r.afternoon[0], r.golden[0])
+        : -8 + 70 * along(r.golden[0], r.night[1]);
+    return `${lite.current ? Math.round(vh / LITE_SUN_STEP_VH) * LITE_SUN_STEP_VH : vh}vh`;
   });
+  const sunShown = useShown(sunOpacity, cover, 3);
 
   useEffect(() => {
-    if (reducedMotion) return;
+    if (reducedMotion || isLite()) return;
     const t0 = performance.now();
     return onAmbientTick((now) => {
       const elapsed = (now - t0) / 1000;
@@ -312,44 +451,69 @@ export default function SkyBackground() {
     >
       {/* the sky is brighter overhead, deeper toward the horizon; deep
           enough that the white light actually registers against it */}
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,#aecff2_0%,#93bceb_48%,#83b0e6_100%)]" />
+      <motion.div
+        className="absolute inset-0 bg-[linear-gradient(180deg,#aecff2_0%,#93bceb_48%,#83b0e6_100%)]"
+        style={{ visibility: dayShown }}
+      />
 
-      <motion.div className="absolute inset-0" style={{ opacity: blobOpacity }}>
+      <motion.div
+        className="absolute inset-0"
+        style={{ opacity: blobOpacity, visibility: dayShown }}
+      >
         {BLOBS.map((blob, i) => (
           <div
             key={blob.className}
             ref={(el) => {
               blobsRef.current[i] = el;
             }}
-            className={`absolute rounded-full ${blob.className}`}
+            className={`absolute ${blob.className}`}
+            style={blobStyle(blob)}
           />
         ))}
       </motion.div>
 
       <motion.div
         className="absolute inset-0"
-        style={{ opacity: afternoon, background: LAYERS.afternoon }}
+        style={{
+          opacity: afternoon,
+          visibility: afternoonShown,
+          background: LAYERS.afternoon,
+        }}
       />
       <motion.div
         className="absolute inset-0"
-        style={{ opacity: golden, background: LAYERS.golden }}
+        style={{
+          opacity: golden,
+          visibility: goldenShown,
+          background: LAYERS.golden,
+        }}
       />
       <motion.div
         className="absolute inset-0"
-        style={{ opacity: dusk, background: LAYERS.dusk }}
+        style={{
+          opacity: dusk,
+          visibility: duskShown,
+          background: LAYERS.dusk,
+        }}
       />
 
-      {/* the low sun, seen through haze: no hard disc, just a hot core and its bloom */}
+      {/* the low sun, seen through haze: no hard disc, just a hot core and
+          its bloom. Slow renderers skip the blend mode, which forces a
+          read-back of the whole sky behind it */}
       <motion.div
-        className="absolute top-[calc(58vh-40vmax)] right-[calc(18vw-40vmax)] size-[80vmax] mix-blend-screen"
-        style={{ opacity: sunOpacity, y: sunY }}
+        className="absolute top-[calc(58vh-40vmax)] right-[calc(18vw-40vmax)] size-[80vmax] mix-blend-screen lite:mix-blend-normal"
+        style={{ opacity: sunOpacity, y: sunY, visibility: sunShown }}
       >
         <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgb(255_244_214/0.95)_0%,rgb(255_228_176/0.85)_3%,rgb(255_210_140/0.6)_8%,rgb(255_170_100/0.32)_18%,rgb(255_140_90/0.12)_34%,rgb(255_130_80/0)_58%)]" />
       </motion.div>
 
       <motion.div
         className="absolute inset-0"
-        style={{ opacity: night, background: LAYERS.night }}
+        style={{
+          opacity: night,
+          visibility: nightShown,
+          background: LAYERS.night,
+        }}
       >
         {/* stars are absolutely placed dots, so they stay round at any aspect */}
         {STARS.map((s) => (
@@ -371,7 +535,7 @@ export default function SkyBackground() {
       </motion.div>
 
       <motion.div
-        className="absolute inset-0"
+        className="absolute inset-0 lite:bg-[url(/grain.webp)]!"
         style={{ backgroundImage: GRAIN, opacity: grainOpacity }}
       />
     </div>

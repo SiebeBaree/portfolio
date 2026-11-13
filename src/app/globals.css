@@ -5,6 +5,12 @@
 @import "../components/overlay/dock.css";
 
 /*
+ * SHARED. `lite:` styles apply on slow renderers (Firefox, low-core
+ * machines), flagged on <html> before first paint by lib/lite.ts.
+ */
+@custom-variant lite (&:where([data-lite], [data-lite] *));
+
+/*
  * SHARED. Everything below is depended on by every section, so a change here
  * shows up across the whole site.
  *
@@ -113,6 +119,12 @@ html::-webkit-scrollbar {
     inset 0 1px 0 rgb(255 255 255 / 0.85),
     0 12px 32px -16px var(--sky-glass-shadow),
     0 2px 8px -4px var(--sky-glass-shadow);
+
+  /* no backdrop blur on slow renderers; a denser fill keeps it legible */
+  &:where([data-lite] *) {
+    backdrop-filter: none;
+    background-color: rgb(255 255 255 / 0.74);
+  }
 }
 
 @utility glass-raised {
@@ -123,6 +135,12 @@ html::-webkit-scrollbar {
     inset 0 1px 0 rgb(255 255 255 / 0.9),
     0 16px 40px -20px var(--sky-glass-shadow),
     0 2px 10px -6px var(--sky-glass-shadow);
+
+  /* no backdrop blur on slow renderers; a denser fill keeps it legible */
+  &:where([data-lite] *) {
+    backdrop-filter: none;
+    background-color: rgb(255 255 255 / 0.86);
+  }
 }
 
 @utility glass-control {
@@ -134,6 +152,12 @@ html::-webkit-scrollbar {
     0 16px 40px -20px var(--sky-glass-shadow),
     0 2px 10px -6px var(--sky-glass-shadow);
   transition: var(--sky-control-transition);
+
+  /* no backdrop blur on slow renderers; a denser fill keeps it legible */
+  &:where([data-lite] *) {
+    backdrop-filter: none;
+    background-color: rgb(255 255 255 / 0.86);
+  }
 
   &:hover {
     border-color: var(--sky-glass-edge-strong);

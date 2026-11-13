@@ -8,6 +8,11 @@ import { EASE_OUT_QUINT } from "@/lib/timeline";
  * SHARED. The one scroll-reveal treatment the whole site uses: a short
  * blur-travel rise. Keeping it in a single place is what makes the sections
  * feel like siblings, so changing it changes every section at once.
+ *
+ * The blur ends as `filter: none`, since even blur(0px) keeps the block on
+ * an offscreen filter surface for the rest of the visit. Slow renderers
+ * (lib/lite.ts) rise without the blur: animating it mid-scroll is what made
+ * scrolling stutter in Firefox.
  */
 export default function Reveal({
   children,
@@ -24,11 +29,16 @@ export default function Reveal({
   const reducedMotion = useReducedMotion();
   return (
     <motion.div
-      className={className}
+      className={`lite:filter-none! ${className ?? ""}`}
       initial={
         reducedMotion ? false : { opacity: 0, y: 26, filter: "blur(10px)" }
       }
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        transitionEnd: { filter: "none" },
+      }}
       viewport={{ once: true, margin }}
       transition={{
         duration: reducedMotion ? 0 : 0.7,

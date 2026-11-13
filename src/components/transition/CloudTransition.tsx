@@ -88,7 +88,6 @@ function Cloud({ puff, phase }: { puff: Puff; phase: Phase }) {
         top: `${puff.y}vh`,
         width: `${puff.w}vw`,
         height: `${puff.h}vh`,
-        filter: "blur(4px)",
         willChange: "transform",
       }}
       initial={{ x: off }}

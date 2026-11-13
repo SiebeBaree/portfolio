@@ -12,6 +12,7 @@ import {
 } from "motion/react";
 import { type RefObject, useEffect, useRef, useState } from "react";
 import { onAmbientTick } from "@/lib/ambient-ticker";
+import { isLite } from "@/lib/lite";
 import { EASE_EXPO_OUT, INTRO } from "@/lib/timeline";
 
 /*
@@ -28,8 +29,9 @@ import { EASE_EXPO_OUT, INTRO } from "@/lib/timeline";
  *     slide the rest of the way out through the left and right edges,
  *     smoothed by a spring so the motion never feels tied to wheel steps.
  *
- * Every cloud is a cluster of soft radial-gradient puffs, no images, with a
- * single static blur on the cluster so only transforms animate. Timing comes
+ * Every cloud is a cluster of soft radial-gradient puffs, no images and no
+ * blur filter: the gradients already fade out, and a blur on a cluster that
+ * scales and slides is redrawn on every frame, which Firefox does slowly. Timing comes
  * from the shared timeline because the hero reveal is choreographed against
  * it.
  */
@@ -222,11 +224,11 @@ function Cloud({
    * the compositor re-drawing them on every vsync. One 50ms step of an 8px,
    * 6-8s sway is a fraction of a pixel, so the motion reads the same. The
    * cosine reproduces the old ease-in-out alternate keyframes; offstage the
-   * subscription drops entirely.
+   * subscription drops entirely, and slow renderers (lib/lite.ts) skip it.
    */
   useEffect(() => {
     const el = bobRef.current;
-    if (!el || reducedMotion || offstage) return;
+    if (!el || reducedMotion || offstage || isLite()) return;
     const t0 = performance.now();
     return onAmbientTick((now) => {
       const k = 0.5 - 0.5 * Math.cos(((now - t0) / 1000 / spec.bob) * Math.PI);
@@ -246,7 +248,6 @@ function Cloud({
         y,
         scale,
         opacity: spec.filler ? fillerOpacity : 1,
-        filter: "blur(4px)",
         willChange: "transform",
       }}
     >

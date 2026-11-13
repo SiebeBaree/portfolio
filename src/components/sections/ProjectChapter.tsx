@@ -53,11 +53,16 @@ export default function ProjectChapter({
     <main className="mx-auto flex min-h-dvh w-full max-w-2xl flex-col px-6 py-24 sm:px-10">
       {/* the header, rising in as the transition clouds part */}
       <motion.div
-        className="flex flex-col items-center text-center"
+        className="flex flex-col items-center text-center lite:filter-none!"
         initial={
           reducedMotion ? false : { opacity: 0, y: 22, filter: "blur(8px)" }
         }
-        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          transitionEnd: { filter: "none" },
+        }}
         transition={{
           duration: reducedMotion ? 0 : 0.8,
           ease: EASE_OUT_QUINT,

@@ -26,8 +26,8 @@ type Scene = {
   second?: { figure: string; label: string };
   body: string;
   shot: StaticImageData;
-  /** crops a shadow border baked into the asset */
-  clip?: string;
+  /** crops a shadow border baked into the asset, as `inset()` offsets */
+  inset?: string;
 };
 
 const SCENES: Scene[] = [
@@ -52,13 +52,19 @@ const SCENES: Scene[] = [
     figureLabel: "raised",
     body: "I founded a company that helped software teams manage their API keys and credentials. We raised VC funding and had paying customers.",
     shot: enkryptifyShot,
-    clip: "inset(5.186% 3.892% round 12px)",
+    inset: "5.186% 3.892%",
   },
 ];
 
-// long, soft and warm: three stacked shadows thrown away from the sun
+/*
+ * Long, soft and warm: three stacked shadows thrown away from the sun. A
+ * box-shadow rather than filter: drop-shadow() (whose blur reads at half
+ * the value, hence the doubled radii here): a 240px drop-shadow filter on a
+ * shot that moves with the scroll is recomputed every frame, which Firefox
+ * does slowly, while a box-shadow is drawn once and reused.
+ */
 const SUN_SHADOW =
-  "drop-shadow(-12px 16px 16px rgb(96 56 34 / 0.22)) drop-shadow(-50px 62px 60px rgb(96 56 34 / 0.26)) drop-shadow(-120px 140px 120px rgb(96 56 34 / 0.2))";
+  "-12px 16px 32px rgb(96 56 34 / 0.22), -50px 62px 120px rgb(96 56 34 / 0.26), -120px 140px 240px rgb(96 56 34 / 0.2)";
 
 function ProjectScene({ scene, flip }: { scene: Scene; flip: boolean }) {
   const ref = useRef<HTMLElement>(null);
@@ -134,25 +140,38 @@ function ProjectScene({ scene, flip }: { scene: Scene; flip: boolean }) {
         </Reveal>
       </div>
 
+      {/* Slow renderers (lib/lite.ts) keep the shot fixed to the page: the
+          parallax slides it against the page, which redraws its 240px
+          shadow on every frame of scrolling when Firefox draws on the CPU */}
       <motion.div
-        className={`motion-reduce:transform-none! md:absolute md:top-1/2 md:w-[54vw] md:-translate-y-1/2 max-md:mt-12 max-md:w-[118vw] ${
+        className={`motion-reduce:transform-none! lite:transform-none! md:absolute md:top-1/2 md:w-[54vw] md:-translate-y-1/2 max-md:mt-12 max-md:w-[118vw] ${
           flip
             ? "md:left-[-6vw] max-md:-ml-[24vw]"
             : "md:right-[-6vw] max-md:ml-6"
         }`}
-        style={{ y: shotY, filter: SUN_SHADOW }}
+        style={{ y: shotY }}
       >
         <StoryLink
           href={href}
           aria-label={`Read the ${scene.name} story`}
-          className="focus-ring block"
+          className="focus-ring relative block"
         >
+          {/* the shadow sits under the visible part of the shot only */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute rounded-[12px]"
+            style={{ inset: scene.inset ?? 0, boxShadow: SUN_SHADOW }}
+          />
           <Image
             src={scene.shot}
             alt=""
             sizes="(max-width: 768px) 118vw, 54vw"
-            className="block h-auto w-full rounded-[12px]"
-            style={scene.clip ? { clipPath: scene.clip } : undefined}
+            className="relative block h-auto w-full rounded-[12px]"
+            style={
+              scene.inset
+                ? { clipPath: `inset(${scene.inset} round 12px)` }
+                : undefined
+            }
           />
         </StoryLink>
       </motion.div>
