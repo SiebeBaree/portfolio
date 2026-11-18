@@ -47,7 +47,7 @@ Siebe's strengths are product and engineering. He would like to meet potential c
 
 Siebe will be in San Francisco from November 3 to December 3 to meet potential co-founders. He is open to calls before the trip. He lives in Belgium and enjoys the gym and karting.
 
-- Email: siebe@baree.be
+- Email: bareesiebe@gmail.com
 - [GitHub](https://github.com/SiebeBaree)
 - [LinkedIn](https://www.linkedin.com/in/siebe-baree)
 - [X](https://x.com/BareeSiebe)

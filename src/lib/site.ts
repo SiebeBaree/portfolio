@@ -48,7 +48,7 @@ export const DEFAULT_OG_IMAGE = {
   alt: "Siebe Barée, founder and software engineer, in front of a blue sky with clouds",
 };
 
-export const CONTACT_EMAIL = "siebe@baree.be";
+export const CONTACT_EMAIL = "bareesiebe@gmail.com";
 
 export const SF_MEETUP_EMAIL_URL = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Meet in San Francisco in November")}`;
 
